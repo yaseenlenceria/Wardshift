@@ -118,7 +118,7 @@ export default function HowWeHelp() {
     <>
       <Seo
         title="How WardShift Helps Private Practices Grow | WardShift"
-        description="From websites and search visibility to patient acquisition, enquiry systems and measurement — explore how WardShift builds the growth side of private medical practice."
+        description="From websites and search visibility to acquisition, enquiry systems and measurement — how WardShift builds the growth side of private medical practice."
         path="/how-we-help/"
       />
 

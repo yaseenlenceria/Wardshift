@@ -103,7 +103,7 @@ export default function Disclaimer() {
     <>
       <Seo
         title="Disclaimer | WardShift"
-        description="Editorial and content disclaimer for wardshift.com — general information only; not medical, legal or financial advice; sample figures are illustrative and results are never guaranteed."
+        description="wardshift.com content is general information only — not medical, legal or financial advice. Sample figures are illustrative and results are never guaranteed."
         path="/disclaimer/"
         schema={{
           "@context": "https://schema.org",

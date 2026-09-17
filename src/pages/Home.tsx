@@ -32,7 +32,7 @@ export default function Home() {
     <>
       <Seo
         title="Private Practice Growth for Doctors & Consultants | WardShift"
-        description="WardShift is the growth side of private practice — improving how patients discover your practice, understand your expertise, build trust and make contact, and how that entire journey is measured."
+        description="WardShift helps private doctors and consultants get found, build trust, convert enquiries and measure what works. Book a Practice Growth Review today."
         path="/"
       />
       <Hero />

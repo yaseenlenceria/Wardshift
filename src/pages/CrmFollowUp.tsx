@@ -70,7 +70,7 @@ export default function CrmFollowUp() {
     <>
       <Seo
         title="Private Practice CRM & Follow-Up Systems | WardShift"
-        description="Organise administrative enquiries, reminders and follow-up. WardShift designs CRM workflows built for private practice — source tracking, stages, notifications and reporting."
+        description="Enquiries lost to slow follow-up cost practices dearly. WardShift designs CRM and follow-up systems so every private enquiry gets a fast, professional response."
         path="/crm-follow-up/"
         schema={faqPageSchema(FAQS)}
       />

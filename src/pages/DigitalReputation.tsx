@@ -12,7 +12,7 @@ export default function DigitalReputation() {
     <>
       <Seo
         title="Digital Reputation for Doctors & Consultants | WardShift"
-        description="Your reputation exists online before you enter the room. WardShift strengthens the search results, profiles and presence patients encounter while researching a doctor."
+        description="Your reputation exists online before you enter the room. WardShift strengthens the search results and profiles patients see when researching a doctor."
         path="/digital-reputation/"
       />
       <ReputationHero />

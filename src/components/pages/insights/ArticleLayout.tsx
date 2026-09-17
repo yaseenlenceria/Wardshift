@@ -147,7 +147,7 @@ export default function ArticleLayout({ meta, related, children, figure }: Artic
   return (
     <div className="bg-paper">
       <Seo
-        title={`${meta.title} | WardShift Insights`}
+        title={`${meta.title} | WardShift`}
         description={meta.standfirst}
         path={meta.path}
         schema={articleSchema(meta)}

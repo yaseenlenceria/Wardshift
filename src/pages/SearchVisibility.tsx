@@ -91,8 +91,8 @@ export default function SearchVisibility() {
   return (
     <>
       <Seo
-        title="Search Visibility for Private Doctors & Consultants | WardShift"
-        description="Help the right patients find your practice. WardShift builds search visibility across doctor-name, specialty, condition, procedure, location and referral-validation searches."
+        title="Search Visibility for Private Doctors | WardShift"
+        description="Help the right patients find your practice first. We build search visibility across doctor-name, specialty, condition, procedure and location searches."
         path="/search-visibility/"
         schema={faqPageSchema(FAQ)}
       />

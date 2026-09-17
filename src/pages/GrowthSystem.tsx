@@ -95,8 +95,8 @@ export default function GrowthSystem() {
   return (
     <>
       <Seo
-        title="The WardShift Growth System — Found, Understood, Trusted | WardShift"
-        description="The WardShift Growth System connects every stage of the private patient journey: Found, Understood, Trusted, Contacted, Measured, Grown. See how engagements work."
+        title="The Growth System: Found, Understood, Trusted | WardShift"
+        description="The Growth System connects every stage of the private patient journey: Found, Understood, Trusted, Contacted, Measured, Grown. See how engagements work."
         path="/growth-system/"
       />
 

@@ -9,7 +9,7 @@ export default function Contact() {
     <>
       <Seo
         title="Contact WardShift | WardShift"
-        description="Contact WardShift — the growth side of private practice. General enquiries, or book a Practice Growth Review to examine your visibility, website, enquiries and measurement."
+        description="Talk to WardShift about growing your private practice — general enquiries, or book a Growth Review covering visibility, website, enquiries and measurement."
         path="/contact/"
       />
       <ContactHero />

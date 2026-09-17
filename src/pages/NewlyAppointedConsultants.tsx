@@ -347,8 +347,8 @@ export default function NewlyAppointedConsultants() {
   return (
     <>
       <Seo
-        title="Newly Appointed Consultants — Build Your Private Practice Right | WardShift"
-        description="Starting private practice? Build the digital foundation correctly from the start — positioning, website, search presence, reputation, enquiry systems and measurement. The WardShift First 90 Days framework."
+        title="Newly Appointed Consultants: First 90 Days | WardShift"
+        description="Starting private practice? Build the digital foundation correctly from day one — positioning, website, search, reputation and enquiries. First 90 Days framework."
         path="/newly-appointed-consultants/"
         schema={faqPageSchema(FAQS)}
       />

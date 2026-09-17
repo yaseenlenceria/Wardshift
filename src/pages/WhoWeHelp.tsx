@@ -245,8 +245,8 @@ export default function WhoWeHelp() {
   return (
     <>
       <Seo
-        title="Who WardShift Helps — Private Doctors, Consultants & Specialists | WardShift"
-        description="WardShift is built around specialist private practice — private doctors, consultants, surgeons, dentists, dermatologists, physiotherapists and established physician-led clinics."
+        title="Who We Help: Private Doctors & Consultants | WardShift"
+        description="WardShift is built around specialist private practice — doctors, consultants, surgeons, dermatologists, physiotherapists and physician-led clinics."
         path="/who-we-help/"
       />
 

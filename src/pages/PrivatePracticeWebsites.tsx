@@ -115,8 +115,8 @@ export default function PrivatePracticeWebsites() {
   return (
     <>
       <Seo
-        title="Private Practice Websites for Doctors & Consultants | WardShift"
-        description="A doctor's website shouldn't be a digital CV. WardShift builds private practice websites around positioning, patient clarity, search foundations and a measurable contact journey."
+        title="Private Practice Websites That Convert Visits | WardShift"
+        description="A doctor's website shouldn't be a digital CV. We build practice websites around positioning, clarity, search foundations and a measurable contact journey."
         path="/private-practice-websites/"
         schema={faqPageSchema(FAQ)}
       />

@@ -12,7 +12,7 @@ export default function GoogleAds() {
     <>
       <Seo
         title="Google Ads for Private Doctors & Consultants | WardShift"
-        description="Measurable Google Ads for private medical practices — high-intent search campaigns, specialist landing pages, call and form tracking, and disciplined budget management."
+        description="Measurable Google Ads for private practices — high-intent search campaigns, specialist landing pages, call and form tracking, disciplined budget management."
         path="/google-ads/"
       />
       <AdsHero />

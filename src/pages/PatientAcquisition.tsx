@@ -171,7 +171,7 @@ export default function PatientAcquisition() {
     <>
       <Seo
         title="Patient Acquisition for Private Practice | WardShift"
-        description="Patient acquisition is a system, not a channel. WardShift connects discovery, trust, conversion, follow-up and measurement for appropriate private-practice enquiries."
+        description="Patient acquisition is a system, not a channel. WardShift connects discovery, trust, conversion, follow-up and measurement for private-practice enquiries."
         path="/patient-acquisition/"
         schema={faqPageSchema(FAQ)}
       />

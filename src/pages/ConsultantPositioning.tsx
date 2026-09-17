@@ -11,8 +11,8 @@ export default function ConsultantPositioning() {
   return (
     <>
       <Seo
-        title="Consultant Positioning — Make Your Expertise Easier to Understand | WardShift"
-        description="Patients don't think in clinical terminology. WardShift helps consultants position their specialty, subspecialty, conditions and procedures clearly — without oversimplifying."
+        title="Consultant Positioning for Private Practice | WardShift"
+        description="Patients don't think in clinical terms. WardShift helps consultants position their specialty, conditions and procedures clearly — without oversimplifying."
         path="/consultant-positioning/"
       />
       <PositioningHero />

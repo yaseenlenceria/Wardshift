@@ -166,7 +166,7 @@ export default function PrivateDoctors() {
     <>
       <Seo
         title="Growth Systems Built Around Private Doctors | WardShift"
-        description="Healthcare growth is not local-business marketing. WardShift builds growth systems around the realities of private medical practice — reputation, trust, referral validation and measurement."
+        description="Healthcare growth is not local-business marketing. WardShift builds growth systems around the realities of private practice — reputation, trust and measurement."
         path="/private-doctors/"
         schema={faqPageSchema(FAQS)}
       />
