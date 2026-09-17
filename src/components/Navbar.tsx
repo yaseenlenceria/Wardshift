@@ -219,7 +219,9 @@ export default function Navbar() {
       className={cn(
         "sticky top-0 z-50 transition-all duration-200",
         compactHeader ? "h-[60px]" : "h-[72px]",
-        compactHeader
+        drawerOpen
+          ? "border-b border-white/10 bg-navy-900"
+          : compactHeader
           ? "border-b border-grey-300/60 bg-white/95 backdrop-blur-md"
           : "border-b border-transparent bg-transparent",
       )}
@@ -227,7 +229,7 @@ export default function Navbar() {
       <div className="mx-auto flex h-full max-w-site items-center justify-between px-6">
         <Link to="/" aria-label="WardShift — home" className="flex items-center">
           <img
-            src="/logo.png"
+            src={drawerOpen ? "/logo-light.png" : "/logo.png"}
             alt="WardShift — The Growth Side of Private Practice"
             className={cn("w-auto transition-all duration-200", compactHeader ? "h-9" : "h-11")}
           />
@@ -282,7 +284,10 @@ export default function Navbar() {
         {/* Mobile toggle */}
         <button
           type="button"
-          className="relative z-[60] flex h-11 w-11 items-center justify-center rounded-md text-navy-800 transition-colors duration-150 hover:bg-grey-100 lg:hidden"
+          className={cn(
+            "relative z-[60] flex h-11 w-11 items-center justify-center rounded-md transition-colors duration-150 lg:hidden",
+            drawerOpen ? "text-white hover:bg-white/10" : "text-navy-800 hover:bg-grey-100",
+          )}
           aria-expanded={drawerOpen}
           aria-controls="mobile-navigation"
           aria-label={drawerOpen ? "Close menu" : "Open menu"}
@@ -301,16 +306,9 @@ export default function Navbar() {
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
             transition={{ duration: 0.28, ease: "easeOut" }}
-            className="fixed inset-x-0 bottom-0 top-[60px] z-40 flex flex-col bg-navy-900 lg:hidden"
+            className="fixed inset-x-0 bottom-0 top-[60px] z-40 flex flex-col bg-navy-900 shadow-[-20px_0_45px_rgba(8,20,38,0.24)] lg:hidden"
           >
-            <div className="border-b border-white/10 px-6 py-5">
-              <img
-                src="/logo-light.png"
-                alt="WardShift — The Growth Side of Private Practice"
-                className="h-9 w-auto"
-              />
-            </div>
-            <nav aria-label="Mobile" className="flex-1 overflow-y-auto px-6 py-4">
+            <nav aria-label="Mobile" className="flex-1 overflow-y-auto px-6 py-5">
               <Link
                 to="/growth-system/"
                 onClick={closeDrawer}
