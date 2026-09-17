@@ -1,6 +1,12 @@
 import { Link } from "react-router";
+import { Linkedin, Youtube } from "lucide-react";
 import { SERVICE_LINKS } from "@/lib/site";
 import { REOPEN_EVENT } from "@/components/CookieConsent";
+
+const SOCIAL_LINKS = [
+  { label: "WardShift on LinkedIn", href: "https://www.linkedin.com/company/wardshift", Icon: Linkedin },
+  { label: "WardShift on YouTube", href: "https://www.youtube.com/@wardshift", Icon: Youtube },
+];
 
 const COMPANY_LINKS = [
   { label: "Who We Help", href: "/who-we-help/" },
@@ -39,6 +45,20 @@ export default function Footer() {
             <p className="mt-5 font-mono text-[11px] uppercase tracking-[0.14em] text-teal-400">
               Growth services, not medical advice
             </p>
+            <div className="mt-6 flex items-center gap-3">
+              {SOCIAL_LINKS.map(({ label, href, Icon }) => (
+                <a
+                  key={href}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-white/15 text-navy-100/80 transition-colors duration-150 hover:border-teal-400 hover:text-teal-400"
+                >
+                  <Icon className="h-[18px] w-[18px]" aria-hidden="true" />
+                </a>
+              ))}
+            </div>
           </div>
 
           <nav aria-label="Services">
