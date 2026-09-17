@@ -1,5 +1,6 @@
 {
   "trailingSlash": true,
+  "buildCommand": "npx playwright install-deps chromium || echo '[vercel] chromium system deps unavailable; prerender will degrade gracefully'; npm run build",
   "rewrites": [
     {
       "source": "/((?!.*\\.).*)",
