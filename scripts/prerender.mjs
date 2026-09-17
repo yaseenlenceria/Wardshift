@@ -14,42 +14,14 @@ import { existsSync } from "node:fs";
 import { platform } from "node:os";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { ROUTES } from "./routes.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const DIST = path.resolve(__dirname, "../dist");
 
-const PUBLIC_ORIGIN = process.env.PRERENDER_ORIGIN ?? "https://wardshift.com";
+const PUBLIC_ORIGIN = process.env.PRERENDER_ORIGIN ?? "https://www.wardshift.com";
 const REQUIRE_PRERENDER = process.env.REQUIRE_PRERENDER === "1";
 const ON_VERCEL = process.env.VERCEL === "1";
-
-const ROUTES = [
-  "/",
-  "/how-we-help/",
-  "/private-practice-websites/",
-  "/search-visibility/",
-  "/patient-acquisition/",
-  "/google-ads/",
-  "/digital-reputation/",
-  "/consultant-positioning/",
-  "/practice-enquiry-systems/",
-  "/crm-follow-up/",
-  "/practice-growth-strategy/",
-  "/who-we-help/",
-  "/private-doctors/",
-  "/newly-appointed-consultants/",
-  "/growth-system/",
-  "/insights/",
-  "/insights/why-a-doctors-website-is-not-a-digital-cv/",
-  "/insights/the-referral-validation-search/",
-  "/insights/what-to-build-before-your-first-private-patient/",
-  "/insights/traffic-is-not-the-outcome/",
-  "/insights/growth-should-be-measurable/",
-  "/about/",
-  "/growth-review/",
-  "/contact/",
-  "/privacy/",
-  "/terms/",
-];
 
 const MIME = {
   ".html": "text/html; charset=utf-8",

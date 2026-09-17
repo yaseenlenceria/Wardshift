@@ -3,4 +3,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://wardshift.com/sitemap.xml
+Sitemap: https://www.wardshift.com/sitemap.xml
