@@ -1,0 +1,6 @@
+# robots.txt — WardShift
+
+User-agent: *
+Allow: /
+
+Sitemap: https://wardshift.com/sitemap.xml

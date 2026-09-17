@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" fill="none">
+  <!-- Faint blueprint grid with crosshair ticks; white strokes at 4% opacity for dark sections -->
+  <g stroke="#FFFFFF" stroke-opacity="0.04" stroke-width="1">
+    <path d="M0 50 H400 M0 100 H400 M0 150 H400 M0 200 H400 M0 250 H400 M0 300 H400 M0 350 H400"/>
+    <path d="M50 0 V400 M100 0 V400 M150 0 V400 M200 0 V400 M250 0 V400 M300 0 V400 M350 0 V400"/>
+  </g>
+  <g stroke="#FFFFFF" stroke-opacity="0.08" stroke-width="1">
+    <path d="M-6 0 H6 M0 -6 V6" transform="translate(100 100)"/>
+    <path d="M-6 0 H6 M0 -6 V6" transform="translate(200 100)"/>
+    <path d="M-6 0 H6 M0 -6 V6" transform="translate(300 100)"/>
+    <path d="M-6 0 H6 M0 -6 V6" transform="translate(100 200)"/>
+    <path d="M-6 0 H6 M0 -6 V6" transform="translate(200 200)"/>
+    <path d="M-6 0 H6 M0 -6 V6" transform="translate(300 200)"/>
+    <path d="M-6 0 H6 M0 -6 V6" transform="translate(100 300)"/>
+    <path d="M-6 0 H6 M0 -6 V6" transform="translate(200 300)"/>
+    <path d="M-6 0 H6 M0 -6 V6" transform="translate(300 300)"/>
+  </g>
+  <rect x="0.5" y="0.5" width="399" height="399" stroke="#FFFFFF" stroke-opacity="0.05"/>
+</svg>

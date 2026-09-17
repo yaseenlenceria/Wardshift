@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0B1F3A" />
+
+    <!-- Favicon set (generated from /logo-mark.png; kept as fallback) -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" href="/logo-mark.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Mono:wght@500&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Default head: the Seo component overrides title/description/canonical per route at runtime. -->
+    <title>Private Practice Growth for Doctors & Consultants | WardShift</title>
+    <meta
+      name="description"
+      content="WardShift is the growth side of private practice — improving how patients discover your practice, understand your expertise, build trust and make contact, and how that entire journey is measured."
+    />
+
+    <!-- Open Graph / Twitter defaults. -->
+    <meta property="og:site_name" content="WardShift" />
+    <meta property="og:title" content="Private Practice Growth for Doctors & Consultants | WardShift" />
+    <meta
+      property="og:description"
+      content="WardShift is the growth side of private practice — improving how patients discover your practice, understand your expertise, build trust and make contact, and how that entire journey is measured."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://wardshift.com/og-image.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Private Practice Growth for Doctors & Consultants | WardShift" />
+    <meta
+      name="twitter:description"
+      content="WardShift is the growth side of private practice — improving how patients discover your practice, understand your expertise, build trust and make contact, and how that entire journey is measured."
+    />
+    <meta name="twitter:image" content="https://wardshift.com/og-image.png" />
+
+    <!-- Sitewide structured data. -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://wardshift.com/#organization",
+            "name": "WardShift",
+            "url": "https://wardshift.com/",
+            "logo": "https://wardshift.com/logo.png",
+            "slogan": "The Growth Side of Private Practice",
+            "description": "WardShift is the growth side of private practice — improving how patients discover your practice, understand your expertise, build trust and make contact, and how that entire journey is measured."
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://wardshift.com/#website",
+            "url": "https://wardshift.com/",
+            "name": "WardShift",
+            "publisher": { "@id": "https://wardshift.com/#organization" }
+          },
+          {
+            "@type": "ProfessionalService",
+            "@id": "https://wardshift.com/#service",
+            "name": "WardShift",
+            "url": "https://wardshift.com/",
+            "description": "Growth systems for private doctors and consultants: private practice websites, search visibility, patient acquisition, Google Ads, digital reputation, consultant positioning, practice enquiry systems, CRM follow-up and practice growth strategy.",
+            "areaServed": "International",
+            "provider": { "@id": "https://wardshift.com/#organization" },
+            "serviceType": [
+              "Private Practice Websites",
+              "Search Visibility",
+              "Patient Acquisition",
+              "Google Ads",
+              "Digital Reputation",
+              "Consultant Positioning",
+              "Practice Enquiry Systems",
+              "CRM Follow-Up",
+              "Practice Growth Strategy"
+            ]
+          }
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

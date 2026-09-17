@@ -1,0 +1,87 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 160 14% 98%;
+    --foreground: 214 22% 30%;
+    --card: 0 0% 100%;
+    --card-foreground: 214 22% 30%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 216 55% 14%;
+    --primary: 216 55% 14%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 213 27% 94%;
+    --secondary-foreground: 216 55% 14%;
+    --muted: 213 27% 94%;
+    --muted-foreground: 215 16% 47%;
+    --accent: 174 80% 40%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 214 20% 85%;
+    --input: 214 20% 85%;
+    --ring: 173 80% 40%;
+    --radius: 0.625rem;
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  body {
+    @apply bg-paper text-grey-700 font-sans antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display text-navy-800;
+    letter-spacing: -0.015em;
+  }
+
+  ::selection {
+    background: #14b8a6;
+    color: #ffffff;
+  }
+
+  :focus-visible {
+    outline: 2px solid #14b8a6;
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+}
+
+@layer utilities {
+  .eyebrow {
+    @apply font-mono text-xs font-medium uppercase tracking-[0.16em];
+  }
+
+  .hairline-dark {
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+}
