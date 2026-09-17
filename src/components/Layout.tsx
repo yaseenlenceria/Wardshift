@@ -18,6 +18,9 @@ export default function Layout({ children }: { children: ReactNode }) {
   // Page-wide smooth scrolling (disabled for reduced motion)
   useEffect(() => {
     if (reducedMotion) return;
+    const coarsePointer = window.matchMedia("(pointer: coarse)").matches;
+    if (coarsePointer) return;
+
     const lenis = new Lenis({ lerp: 0.1 });
     let rafId = 0;
     const raf = (time: number) => {
