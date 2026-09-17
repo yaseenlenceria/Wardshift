@@ -7,7 +7,7 @@
  * - Best-effort archives the submission in the "Myforms" Edge Config store.
  */
 
-const FORMSPARK_FORM_ID = process.env.FORMSPARK_FORM_ID ?? "RO53GPcsj";
+const FORMSPARK_FORM_ID = process.env.FORMSPARK_FORM_ID ?? "CkVmmpWlo";
 
 const EDGE_CONFIG_ID = process.env.EDGE_CONFIG_ID ?? "";
 const VERCEL_API_TOKEN = process.env.VERCEL_API_TOKEN ?? "";
