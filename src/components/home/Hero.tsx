@@ -72,7 +72,8 @@ const LOCAL_RESULTS = [
   {
     name: "Competitor A",
     meta: "Private orthopaedic clinic",
-    position: 1,
+    beforePosition: 1,
+    afterPosition: 2,
     rating: "4.9",
     reviews: "186 reviews",
     active: false,
@@ -80,7 +81,8 @@ const LOCAL_RESULTS = [
   {
     name: "Your Practice",
     meta: "Consultant knee specialist",
-    position: 3,
+    beforePosition: 3,
+    afterPosition: 1,
     rating: "4.7",
     reviews: "64 reviews",
     active: true,
@@ -88,7 +90,8 @@ const LOCAL_RESULTS = [
   {
     name: "Competitor B",
     meta: "Sports injury consultant",
-    position: 4,
+    beforePosition: 4,
+    afterPosition: 4,
     rating: "4.8",
     reviews: "112 reviews",
     active: false,
@@ -110,6 +113,29 @@ function StarRating({ value, reviews }: { value: string; reviews: string }) {
 }
 
 function SearchResultsVisual({ reduced }: { reduced: boolean }) {
+  const [improved, setImproved] = useState(reduced);
+
+  useEffect(() => {
+    if (reduced) {
+      const timer = setTimeout(() => setImproved(true), 0);
+      return () => clearTimeout(timer);
+    }
+
+    const first = setTimeout(() => setImproved(true), 2200);
+    const interval = setInterval(() => setImproved((current) => !current), 6200);
+    return () => {
+      clearTimeout(first);
+      clearInterval(interval);
+    };
+  }, [reduced]);
+
+  const positionedResults = [...LOCAL_RESULTS]
+    .map((result) => ({
+      ...result,
+      position: improved ? result.afterPosition : result.beforePosition,
+    }))
+    .sort((a, b) => a.position - b.position);
+
   return (
     <div className="mt-5 overflow-hidden rounded-[12px] border border-grey-300 bg-[#f8fafc] shadow-card">
       <div className="flex items-center gap-1.5 border-b border-grey-300 bg-white px-4 py-3">
@@ -134,15 +160,19 @@ function SearchResultsVisual({ reduced }: { reduced: boolean }) {
             <div className="absolute inset-0 opacity-70" style={{ backgroundImage: "url(/texture-grid.svg)", backgroundSize: "180px 180px" }} />
             <div className="absolute left-5 top-5 h-20 w-24 rounded-full border border-white/80 bg-white/40" />
             <div className="absolute bottom-5 right-4 h-24 w-28 rounded-full border border-white/80 bg-white/40" />
-            {LOCAL_RESULTS.map((result, i) => (
+            {positionedResults.map((result, i) => (
               <motion.span
                 key={result.name}
                 initial={reduced ? false : { opacity: 0, y: 8, scale: 0.92 }}
-                animate={reduced ? undefined : { opacity: 1, y: 0, scale: 1 }}
-                transition={{ duration: 0.45, ease: EASE_OUT, delay: 0.2 + i * 0.12 }}
+                animate={reduced ? undefined : { opacity: 1, y: improved && result.active ? -18 : 0, scale: result.active && improved ? 1.08 : 1 }}
+                transition={{ duration: 0.55, ease: EASE_OUT, delay: 0.2 + i * 0.08 }}
                 className={cn(
                   "absolute flex h-8 w-8 items-center justify-center rounded-full border-2 border-white text-[11px] font-bold shadow-card",
-                  result.active ? "left-[48%] top-[48%] bg-teal-500 text-navy-950" : i === 0 ? "left-[24%] top-[26%] bg-navy-800 text-white" : "right-[18%] top-[62%] bg-white text-navy-800",
+                  result.active
+                    ? "left-[48%] top-[48%] bg-teal-500 text-navy-950"
+                    : result.name === "Competitor A"
+                      ? "left-[24%] top-[26%] bg-navy-800 text-white"
+                      : "right-[18%] top-[62%] bg-white text-navy-800",
                 )}
               >
                 {result.position}
@@ -156,20 +186,25 @@ function SearchResultsVisual({ reduced }: { reduced: boolean }) {
                 Local results
               </p>
               <p className="font-mono text-[10px] font-medium uppercase tracking-[0.14em] text-grey-500">
-                Today
+                {improved ? "WardShift lift" : "Today"}
               </p>
             </div>
 
             <ul className="mt-2 space-y-2">
-              {LOCAL_RESULTS.map((result, i) => (
+              {positionedResults.map((result, i) => (
                 <motion.li
                   key={result.name}
+                  layout="position"
                   initial={reduced ? false : { opacity: 0, y: 12 }}
                   animate={reduced ? undefined : { opacity: 1, y: 0 }}
-                  transition={{ duration: 0.45, ease: EASE_OUT, delay: 0.35 + i * 0.1 }}
+                  transition={{ duration: 0.55, ease: EASE_OUT, delay: 0.25 + i * 0.08 }}
                   className={cn(
                     "rounded-lg border p-3",
-                    result.active ? "border-teal-500/60 bg-teal-100/45" : "border-grey-300 bg-white",
+                    result.active
+                      ? improved
+                        ? "border-teal-500 bg-teal-100/70 shadow-[0_0_22px_rgba(20,184,166,0.16)]"
+                        : "border-teal-500/60 bg-teal-100/45"
+                      : "border-grey-300 bg-white",
                   )}
                 >
                   <div className="flex items-start justify-between gap-3">
@@ -197,7 +232,7 @@ function SearchResultsVisual({ reduced }: { reduced: boolean }) {
           <p className="text-[12px] font-semibold text-[#1a0dab]">Your Practice | Consultant Knee Specialist</p>
           <p className="mt-1 text-[11px] text-[#006621]">wardshift-example.co.uk/knee-specialist</p>
           <p className="mt-1 text-[11px] leading-snug text-grey-500">
-            A stronger result page shows the practice clearly, but it does not promise position 1.
+            The visual shows the practice moving from position 3 to position 1 as visibility improves.
           </p>
         </div>
       </div>
