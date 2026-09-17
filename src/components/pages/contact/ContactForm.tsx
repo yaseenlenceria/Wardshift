@@ -5,6 +5,7 @@ import { Link } from "react-router";
 import { ArrowRight } from "lucide-react";
 import { Field, FormSuccess, inputClass, isValidEmail } from "@/components/pages/forms/fields";
 import { fadeUp, staggerParent, usePrefersReducedMotion } from "@/lib/motion";
+import { submitForm } from "@/lib/forms";
 
 interface FormValues {
   name: string;
@@ -12,35 +13,53 @@ interface FormValues {
   organisation: string;
   role: string;
   message: string;
+  website: string;
 }
 
 type FormErrors = Partial<Record<keyof FormValues, string>>;
 
-const INITIAL: FormValues = { name: "", email: "", organisation: "", role: "", message: "" };
+const INITIAL: FormValues = { name: "", email: "", organisation: "", role: "", message: "", website: "" };
 
-/** General contact form — front-end only, same pattern as the Growth Review form. */
 export default function ContactForm() {
   const [values, setValues] = useState<FormValues>(INITIAL);
   const [errors, setErrors] = useState<FormErrors>({});
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const reduced = usePrefersReducedMotion();
 
   const set = (key: keyof FormValues) => (value: string) => {
     setValues((v) => ({ ...v, [key]: value }));
     setErrors((e) => (e[key] ? { ...e, [key]: undefined } : e));
+    setSubmitError(null);
   };
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    // Front-end only: validate and show the success state (no backend call).
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if (sending) return;
     const next: FormErrors = {};
     if (!values.name.trim()) next.name = "Please enter your name.";
     if (!values.email.trim()) next.email = "Please enter your email address.";
     else if (!isValidEmail(values.email)) next.email = "Please enter a valid email address.";
     if (!values.message.trim()) next.message = "Please enter a message.";
     setErrors(next);
-    if (Object.keys(next).length === 0) {
+    if (Object.keys(next).length > 0) return;
+
+    setSending(true);
+    setSubmitError(null);
+    const result = await submitForm("contact", {
+      name: values.name,
+      email: values.email,
+      organisation: values.organisation,
+      role: values.role,
+      message: values.message,
+      website: values.website,
+    });
+    setSending(false);
+    if (result.ok) {
       setSubmitted(true);
+    } else {
+      setSubmitError(result.message);
     }
   };
 
@@ -65,6 +84,16 @@ export default function ContactForm() {
 
   return (
     <motion.form {...fieldMotion} noValidate onSubmit={handleSubmit} className="space-y-5">
+      <input
+        type="text"
+        name="website"
+        value={values.website}
+        onChange={(e) => set("website")(e.target.value)}
+        className="hidden"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+      />
       <motion.div variants={fadeUp} className="grid gap-5 sm:grid-cols-2">
         <Field id="ct-name" label="Name" required error={errors.name}>
           <input
@@ -129,11 +158,17 @@ export default function ContactForm() {
       </motion.div>
 
       <motion.div variants={fadeUp}>
+        {submitError && (
+          <p role="alert" className="mb-3 text-[14px] font-medium text-red-600">
+            {submitError}
+          </p>
+        )}
         <button
           type="submit"
-          className="group inline-flex h-12 w-full items-center justify-center gap-2 rounded-lg bg-navy-800 px-6 text-[15px] font-semibold tracking-[0.01em] text-white transition-colors duration-150 hover:bg-teal-500 hover:text-navy-950 sm:w-auto"
+          disabled={sending}
+          className="group inline-flex h-12 w-full items-center justify-center gap-2 rounded-lg bg-navy-800 px-6 text-[15px] font-semibold tracking-[0.01em] text-white transition-colors duration-150 hover:bg-teal-500 hover:text-navy-950 disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
         >
-          Send Message
+          {sending ? "Sending…" : "Send Message"}
           <ArrowRight
             className="h-4 w-4 transition-transform duration-150 group-hover:translate-x-0.5"
             aria-hidden="true"
