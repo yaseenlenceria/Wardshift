@@ -3,6 +3,114 @@
   "buildCommand": "npm run build && node scripts/sync-prerendered.mjs apply",
   "rewrites": [
     {
+      "source": "/how-we-help/",
+      "destination": "/how-we-help/index.html"
+    },
+    {
+      "source": "/private-practice-websites/",
+      "destination": "/private-practice-websites/index.html"
+    },
+    {
+      "source": "/search-visibility/",
+      "destination": "/search-visibility/index.html"
+    },
+    {
+      "source": "/patient-acquisition/",
+      "destination": "/patient-acquisition/index.html"
+    },
+    {
+      "source": "/google-ads/",
+      "destination": "/google-ads/index.html"
+    },
+    {
+      "source": "/digital-reputation/",
+      "destination": "/digital-reputation/index.html"
+    },
+    {
+      "source": "/consultant-positioning/",
+      "destination": "/consultant-positioning/index.html"
+    },
+    {
+      "source": "/practice-enquiry-systems/",
+      "destination": "/practice-enquiry-systems/index.html"
+    },
+    {
+      "source": "/crm-follow-up/",
+      "destination": "/crm-follow-up/index.html"
+    },
+    {
+      "source": "/practice-growth-strategy/",
+      "destination": "/practice-growth-strategy/index.html"
+    },
+    {
+      "source": "/who-we-help/",
+      "destination": "/who-we-help/index.html"
+    },
+    {
+      "source": "/private-doctors/",
+      "destination": "/private-doctors/index.html"
+    },
+    {
+      "source": "/newly-appointed-consultants/",
+      "destination": "/newly-appointed-consultants/index.html"
+    },
+    {
+      "source": "/growth-system/",
+      "destination": "/growth-system/index.html"
+    },
+    {
+      "source": "/insights/",
+      "destination": "/insights/index.html"
+    },
+    {
+      "source": "/insights/why-a-doctors-website-is-not-a-digital-cv/",
+      "destination": "/insights/why-a-doctors-website-is-not-a-digital-cv/index.html"
+    },
+    {
+      "source": "/insights/the-referral-validation-search/",
+      "destination": "/insights/the-referral-validation-search/index.html"
+    },
+    {
+      "source": "/insights/what-to-build-before-your-first-private-patient/",
+      "destination": "/insights/what-to-build-before-your-first-private-patient/index.html"
+    },
+    {
+      "source": "/insights/traffic-is-not-the-outcome/",
+      "destination": "/insights/traffic-is-not-the-outcome/index.html"
+    },
+    {
+      "source": "/insights/growth-should-be-measurable/",
+      "destination": "/insights/growth-should-be-measurable/index.html"
+    },
+    {
+      "source": "/about/",
+      "destination": "/about/index.html"
+    },
+    {
+      "source": "/growth-review/",
+      "destination": "/growth-review/index.html"
+    },
+    {
+      "source": "/contact/",
+      "destination": "/contact/index.html"
+    },
+    {
+      "source": "/privacy/",
+      "destination": "/privacy/index.html"
+    },
+    {
+      "source": "/terms/",
+      "destination": "/terms/index.html"
+    },
+    {
+      "source": "/cookies/",
+      "destination": "/cookies/index.html"
+    },
+    {
+      "source": "/disclaimer/",
+      "destination": "/disclaimer/index.html"
+    },
+    {
       "source": "/((?!.*\\.).*)",
       "destination": "/index.html"
     }
@@ -25,6 +133,19 @@
           "value": "text/plain; charset=utf-8"
         }
       ]
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "wardshift.com"
+        }
+      ],
+      "destination": "https://www.wardshift.com/:path*",
+      "permanent": true
     }
   ]
 }

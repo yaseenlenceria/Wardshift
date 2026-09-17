@@ -37,9 +37,12 @@ export default function Seo({ title, description, path, schema, noindex }: SeoPr
     document.title = title;
     const url = absoluteSiteUrl(path);
     upsertMeta('meta[name="description"]', { name: "description", content: description });
-    if (noindex) {
-      upsertMeta('meta[name="robots"]', { name: "robots", content: "noindex, nofollow" });
-    }
+    upsertMeta('meta[name="robots"]', {
+      name: "robots",
+      content: noindex
+        ? "noindex, nofollow"
+        : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    });
     upsertLink("canonical", url);
     upsertMeta('meta[property="og:title"]', { property: "og:title", content: title });
     upsertMeta('meta[property="og:description"]', { property: "og:description", content: description });
