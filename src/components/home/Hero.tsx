@@ -1,8 +1,8 @@
 import { memo, useEffect, useRef, useState } from "react";
 import { Link } from "react-router";
-import { AnimatePresence, motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import type { MouseEvent, ReactNode } from "react";
-import { ArrowRight, Search } from "lucide-react";
+import { ArrowRight, MapPin, Search, Star } from "lucide-react";
 import IllustrativeBadge from "@/components/IllustrativeBadge";
 import WordReveal from "@/components/WordReveal";
 import { EASE_OUT, usePrefersReducedMotion } from "@/lib/motion";
@@ -67,113 +67,140 @@ function useTypewriter(text: string, disabled: boolean) {
   return shown;
 }
 
-/* ---------- visibility stack with re-order rise ---------- */
-interface StackRow {
-  id: string;
-  name: string;
-  before: number;
-  after: number;
-}
-
-const STACK: StackRow[] = [
-  { id: "a", name: "Competitor A", before: 1, after: 1 },
-  { id: "you", name: "Your Practice", before: 8, after: 3 },
-  { id: "b", name: "Competitor B", before: 3, after: 4 },
+/* ---------- search results page visual ---------- */
+const LOCAL_RESULTS = [
+  {
+    name: "Competitor A",
+    meta: "Private orthopaedic clinic",
+    position: 1,
+    rating: "4.9",
+    reviews: "186 reviews",
+    active: false,
+  },
+  {
+    name: "Your Practice",
+    meta: "Consultant knee specialist",
+    position: 3,
+    rating: "4.7",
+    reviews: "64 reviews",
+    active: true,
+  },
+  {
+    name: "Competitor B",
+    meta: "Sports injury consultant",
+    position: 4,
+    rating: "4.8",
+    reviews: "112 reviews",
+    active: false,
+  },
 ];
 
-function VisibilityStack({ reduced }: { reduced: boolean }) {
-  const [improved, setImproved] = useState(reduced);
-
-  useEffect(() => {
-    if (reduced) {
-      const timer = setTimeout(() => setImproved(true), 0);
-      return () => clearTimeout(timer);
-    }
-    let on = false;
-    const cycle = () => {
-      on = !on;
-      setImproved(on);
-    };
-    const first = setTimeout(cycle, 2600);
-    const interval = setInterval(cycle, 6000);
-    return () => {
-      clearTimeout(first);
-      clearInterval(interval);
-    };
-  }, [reduced]);
-
-  const rows = [...STACK].sort((x, y) => (improved ? x.after - y.after : x.before - y.before));
-
+function StarRating({ value, reviews }: { value: string; reviews: string }) {
   return (
-    <div className="mt-5">
-      <div className="flex items-center justify-between gap-3">
-        <p className="font-mono text-[10px] font-medium uppercase tracking-[0.14em] text-grey-500">
-          Local search positions
-        </p>
-        <AnimatePresence mode="wait">
-          <motion.span
-            key={improved ? "after" : "before"}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.25 }}
-            className={cn(
-              "font-mono text-[10px] font-medium uppercase tracking-[0.14em]",
-              improved ? "text-teal-600" : "text-grey-500",
-            )}
-          >
-            {improved ? "WardShift improvement" : "Today"}
-          </motion.span>
-        </AnimatePresence>
+    <span className="flex items-center gap-1 text-[11px] text-grey-500">
+      <span className="font-semibold text-amber-500">{value}</span>
+      <span className="flex text-amber-400" aria-hidden="true">
+        {[0, 1, 2, 3, 4].map((i) => (
+          <Star key={i} className="h-2.5 w-2.5 fill-current stroke-current" />
+        ))}
+      </span>
+      {reviews}
+    </span>
+  );
+}
+
+function SearchResultsVisual({ reduced }: { reduced: boolean }) {
+  return (
+    <div className="mt-5 overflow-hidden rounded-[12px] border border-grey-300 bg-[#f8fafc] shadow-card">
+      <div className="flex items-center gap-1.5 border-b border-grey-300 bg-white px-4 py-3">
+        <span className="h-2.5 w-2.5 rounded-full bg-[#ef4444]" aria-hidden="true" />
+        <span className="h-2.5 w-2.5 rounded-full bg-[#f59e0b]" aria-hidden="true" />
+        <span className="h-2.5 w-2.5 rounded-full bg-[#22c55e]" aria-hidden="true" />
+        <span className="ml-2 truncate rounded-full bg-grey-100 px-3 py-1 font-mono text-[10px] text-grey-500">
+          google.com/search?q=knee+specialist+near+me
+        </span>
       </div>
-      <ul className="mt-3 space-y-2">
-        {rows.map((row) => {
-          const isYou = row.id === "you";
-          const pos = improved ? row.after : row.before;
-          return (
-            <motion.li
-              key={row.id}
-              layout="position"
-              transition={{ duration: 0.7, ease: EASE_OUT }}
-              className={cn(
-                "flex items-center justify-between rounded-lg border px-3.5 py-2.5 transition-colors duration-500",
-                isYou
-                  ? improved
-                    ? "border-teal-500/60 bg-teal-100/50 shadow-[0_0_20px_rgba(20,184,166,0.15)]"
-                    : "border-grey-300 bg-grey-100/60"
-                  : "border-grey-300/70 bg-white",
-              )}
-            >
-              <span className="flex items-center gap-2.5">
-                <span
-                  className={cn(
-                    "h-1.5 w-1.5 rounded-full",
-                    isYou && improved ? "bg-teal-500" : "bg-grey-300",
-                  )}
-                  aria-hidden="true"
-                />
-                <span
-                  className={cn(
-                    "text-[13.5px] font-semibold",
-                    isYou ? (improved ? "text-navy-800" : "text-grey-500") : "text-grey-700",
-                  )}
-                >
-                  {row.name}
-                </span>
-              </span>
-              <span
+
+      <div className="p-4">
+        <div className="rounded-full border border-grey-300 bg-white px-4 py-2.5 shadow-[0_10px_24px_rgba(15,23,42,0.06)]">
+          <div className="flex items-center gap-2.5">
+            <Search className="h-4 w-4 shrink-0 text-grey-500" aria-hidden="true" />
+            <span className="truncate text-[13px] text-navy-800">knee specialist near me</span>
+          </div>
+        </div>
+
+        <div className="mt-4 grid gap-3 sm:grid-cols-[0.9fr_1.1fr]">
+          <div className="relative min-h-[166px] overflow-hidden rounded-[10px] border border-grey-300 bg-[#dbeafe]">
+            <div className="absolute inset-0 opacity-70" style={{ backgroundImage: "url(/texture-grid.svg)", backgroundSize: "180px 180px" }} />
+            <div className="absolute left-5 top-5 h-20 w-24 rounded-full border border-white/80 bg-white/40" />
+            <div className="absolute bottom-5 right-4 h-24 w-28 rounded-full border border-white/80 bg-white/40" />
+            {LOCAL_RESULTS.map((result, i) => (
+              <motion.span
+                key={result.name}
+                initial={reduced ? false : { opacity: 0, y: 8, scale: 0.92 }}
+                animate={reduced ? undefined : { opacity: 1, y: 0, scale: 1 }}
+                transition={{ duration: 0.45, ease: EASE_OUT, delay: 0.2 + i * 0.12 }}
                 className={cn(
-                  "font-mono text-[10.5px] font-medium uppercase tracking-[0.1em]",
-                  isYou && improved ? "text-teal-600" : "text-grey-500",
+                  "absolute flex h-8 w-8 items-center justify-center rounded-full border-2 border-white text-[11px] font-bold shadow-card",
+                  result.active ? "left-[48%] top-[48%] bg-teal-500 text-navy-950" : i === 0 ? "left-[24%] top-[26%] bg-navy-800 text-white" : "right-[18%] top-[62%] bg-white text-navy-800",
                 )}
               >
-                Position {pos}
-                {isYou && improved && <span className="ml-1.5" aria-hidden="true">↑</span>}
-              </span>
-            </motion.li>
-          );
-        })}
-      </ul>
+                {result.position}
+              </motion.span>
+            ))}
+          </div>
+
+          <div className="rounded-[10px] border border-grey-300 bg-white p-3">
+            <div className="flex items-center justify-between gap-3 border-b border-grey-300 pb-2">
+              <p className="font-mono text-[10px] font-medium uppercase tracking-[0.14em] text-grey-500">
+                Local results
+              </p>
+              <p className="font-mono text-[10px] font-medium uppercase tracking-[0.14em] text-grey-500">
+                Today
+              </p>
+            </div>
+
+            <ul className="mt-2 space-y-2">
+              {LOCAL_RESULTS.map((result, i) => (
+                <motion.li
+                  key={result.name}
+                  initial={reduced ? false : { opacity: 0, y: 12 }}
+                  animate={reduced ? undefined : { opacity: 1, y: 0 }}
+                  transition={{ duration: 0.45, ease: EASE_OUT, delay: 0.35 + i * 0.1 }}
+                  className={cn(
+                    "rounded-lg border p-3",
+                    result.active ? "border-teal-500/60 bg-teal-100/45" : "border-grey-300 bg-white",
+                  )}
+                >
+                  <div className="flex items-start justify-between gap-3">
+                    <div>
+                      <p className={cn("text-[13px] font-semibold leading-tight", result.active ? "text-navy-800" : "text-grey-700")}>
+                        {result.name}
+                      </p>
+                      <p className="mt-1 text-[11px] leading-snug text-grey-500">{result.meta}</p>
+                    </div>
+                    <span className={cn("rounded-full px-2 py-1 font-mono text-[9px] font-semibold uppercase tracking-[0.08em]", result.active ? "bg-white text-teal-600" : "bg-grey-100 text-grey-500")}>
+                      Pos {result.position}
+                    </span>
+                  </div>
+                  <div className="mt-2 flex items-center gap-2">
+                    <MapPin className="h-3 w-3 text-grey-400" aria-hidden="true" />
+                    <StarRating value={result.rating} reviews={result.reviews} />
+                  </div>
+                </motion.li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        <div className="mt-3 rounded-[10px] border border-grey-300 bg-white p-3">
+          <p className="text-[12px] font-semibold text-[#1a0dab]">Your Practice | Consultant Knee Specialist</p>
+          <p className="mt-1 text-[11px] text-[#006621]">wardshift-example.co.uk/knee-specialist</p>
+          <p className="mt-1 text-[11px] leading-snug text-grey-500">
+            A stronger result page shows the practice clearly, but it does not promise position 1.
+          </p>
+        </div>
+      </div>
     </div>
   );
 }
@@ -280,7 +307,7 @@ function HeroVisual({ reduced }: { reduced: boolean }) {
             <IllustrativeBadge className="px-2 py-0.5 text-[9px]" />
           </div>
 
-          <VisibilityStack reduced={reduced} />
+          <SearchResultsVisual reduced={reduced} />
         </motion.div>
 
         {/* enquiry notification */}
