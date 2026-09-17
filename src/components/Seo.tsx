@@ -8,6 +8,8 @@ interface SeoProps {
   path: string;
   /** Optional JSON-LD schema object(s) injected into <head> while mounted. */
   schema?: object | object[];
+  /** Emits a robots noindex tag — for the 404 route and other non-indexable pages. */
+  noindex?: boolean;
 }
 
 function upsertMeta(selector: string, attrs: Record<string, string>) {
@@ -30,11 +32,14 @@ function upsertLink(rel: string, href: string) {
 }
 
 /** Per-route head manager: title, description, canonical, OG/Twitter tags, optional JSON-LD. */
-export default function Seo({ title, description, path, schema }: SeoProps) {
+export default function Seo({ title, description, path, schema, noindex }: SeoProps) {
   useEffect(() => {
     document.title = title;
     const url = absoluteSiteUrl(path);
     upsertMeta('meta[name="description"]', { name: "description", content: description });
+    if (noindex) {
+      upsertMeta('meta[name="robots"]', { name: "robots", content: "noindex, nofollow" });
+    }
     upsertLink("canonical", url);
     upsertMeta('meta[property="og:title"]', { property: "og:title", content: title });
     upsertMeta('meta[property="og:description"]', { property: "og:description", content: description });
@@ -54,7 +59,7 @@ export default function Seo({ title, description, path, schema }: SeoProps) {
       name: "twitter:image",
       content: absoluteSiteUrl("/og-image.png"),
     });
-  }, [title, description, path]);
+  }, [title, description, path, noindex]);
 
   // Inject per-route JSON-LD structured data; remove it again on unmount.
   useEffect(() => {

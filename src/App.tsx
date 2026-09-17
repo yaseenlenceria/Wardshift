@@ -23,12 +23,15 @@ const GrowthReview = lazy(() => import("@/pages/GrowthReview"));
 const Contact = lazy(() => import("@/pages/Contact"));
 const Privacy = lazy(() => import("@/pages/Privacy"));
 const Terms = lazy(() => import("@/pages/Terms"));
+const Cookies = lazy(() => import("@/pages/Cookies"));
+const Disclaimer = lazy(() => import("@/pages/Disclaimer"));
 const WebsiteNotDigitalCv = lazy(() => import("@/pages/insights/WebsiteNotDigitalCv"));
 const ReferralValidationSearch = lazy(() => import("@/pages/insights/ReferralValidationSearch"));
 const BeforeFirstPrivatePatient = lazy(() => import("@/pages/insights/BeforeFirstPrivatePatient"));
 const TrafficIsNotTheOutcome = lazy(() => import("@/pages/insights/TrafficIsNotTheOutcome"));
 const GrowthShouldBeMeasurable = lazy(() => import("@/pages/insights/GrowthShouldBeMeasurable"));
 const NotFound = lazy(() => import("@/pages/NotFound"));
+import CookieConsent from "@/components/CookieConsent";
 
 /** Minimal branded route-loading state — navy field with the WardShift mark. */
 function RouteLoading() {
@@ -76,9 +79,12 @@ export default function App() {
           <Route path="/contact/" element={<Contact />} />
           <Route path="/privacy/" element={<Privacy />} />
           <Route path="/terms/" element={<Terms />} />
+          <Route path="/cookies/" element={<Cookies />} />
+          <Route path="/disclaimer/" element={<Disclaimer />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>
+      <CookieConsent />
     </Layout>
   );
 }

@@ -1,5 +1,6 @@
 import { Link } from "react-router";
 import { SERVICE_LINKS } from "@/lib/site";
+import { REOPEN_EVENT } from "@/components/CookieConsent";
 
 const COMPANY_LINKS = [
   { label: "Who We Help", href: "/who-we-help/" },
@@ -13,6 +14,8 @@ const COMPANY_LINKS = [
 const LEGAL_LINKS = [
   { label: "Privacy", href: "/privacy/" },
   { label: "Terms", href: "/terms/" },
+  { label: "Cookies", href: "/cookies/" },
+  { label: "Disclaimer", href: "/disclaimer/" },
 ];
 
 export default function Footer() {
@@ -83,6 +86,15 @@ export default function Footer() {
                   </Link>
                 </li>
               ))}
+              <li>
+                <button
+                  type="button"
+                  onClick={() => window.dispatchEvent(new Event(REOPEN_EVENT))}
+                  className="text-left text-[14px] text-navy-100/80 transition-colors duration-150 hover:text-teal-400"
+                >
+                  Cookie Settings
+                </button>
+              </li>
             </ul>
             <p className="mt-6 text-[13px] leading-relaxed text-navy-100/60">
               Ethical, evidence-led growth work. We never guarantee rankings, positions or patient volume.
@@ -91,7 +103,15 @@ export default function Footer() {
         </div>
 
         <div className="mt-14 border-t border-white/10 pt-6">
-          <p className="text-[13px] text-navy-100/60">© {year} WardShift. All rights reserved.</p>
+          <p className="text-[13px] text-navy-100/60">
+            © {year} WardShift. All rights reserved. ·{" "}
+            <a
+              href="mailto:hello@wardshift.com"
+              className="transition-colors duration-150 hover:text-teal-400"
+            >
+              hello@wardshift.com
+            </a>
+          </p>
           <p className="mt-2 text-[13px] text-navy-100/60">
             WardShift provides practice growth services; nothing on this site is medical advice. Sample
             figures on this site are illustrative.

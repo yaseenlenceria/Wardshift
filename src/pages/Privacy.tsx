@@ -110,7 +110,8 @@ const SECTIONS: LegalSection[] = [
         </ul>
         <p>
           You can opt out at any time through your browser settings by blocking or deleting
-          cookies.
+          cookies. Full details — including how to change your consent choice — are in our{" "}
+          <Link to="/cookies/">Cookie Policy</Link>.
         </p>
       </>
     ),

@@ -8,6 +8,7 @@ export default function NotFound() {
         title="Page Not Found | WardShift"
         description="The page you were looking for could not be found. Explore WardShift — the growth side of private practice."
         path="/404/"
+        noindex
       />
       <section className="mx-auto flex max-w-[880px] flex-col items-start px-6 py-32 md:py-40">
         <p className="font-mono text-xs uppercase tracking-[0.16em] text-teal-600">404 — Page not found</p>

@@ -26,4 +26,6 @@ export const ROUTES = [
   "/contact/",
   "/privacy/",
   "/terms/",
+  "/cookies/",
+  "/disclaimer/",
 ];
