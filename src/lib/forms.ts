@@ -5,7 +5,7 @@ export async function submitForm(
   fields: Record<string, string>,
 ): Promise<SubmitResult> {
   try {
-    const res = await fetch("/api/forms", {
+    const res = await fetch("/api/forms/", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ form, website: "", referrer: window.location.href, ...fields }),
