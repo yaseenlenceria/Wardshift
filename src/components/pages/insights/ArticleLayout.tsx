@@ -151,6 +151,9 @@ export default function ArticleLayout({ meta, related, children, figure }: Artic
         description={meta.standfirst}
         path={meta.path}
         schema={articleSchema(meta)}
+        type="article"
+        publishedTime={meta.datePublished}
+        modifiedTime={meta.dateModified}
       />
 
       <article className="mx-auto max-w-[720px] px-6 pb-24 pt-[72px] lg:pt-24">
@@ -170,7 +173,16 @@ export default function ArticleLayout({ meta, related, children, figure }: Artic
             animate="visible"
             className="font-mono text-xs font-medium uppercase tracking-[0.16em] text-teal-600"
           >
-            {meta.category} · {meta.readTime}
+            {meta.category} · By WardShift ·{" "}
+            <time dateTime={meta.datePublished}>
+              {new Intl.DateTimeFormat("en-GB", {
+                day: "numeric",
+                month: "short",
+                year: "numeric",
+                timeZone: "UTC",
+              }).format(new Date(`${meta.datePublished}T00:00:00Z`))}
+            </time>{" "}
+            · {meta.readTime}
           </motion.p>
           <WordReveal
             text={meta.title}

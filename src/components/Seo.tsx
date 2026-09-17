@@ -10,6 +10,11 @@ interface SeoProps {
   schema?: object | object[];
   /** Emits a robots noindex tag — for the 404 route and other non-indexable pages. */
   noindex?: boolean;
+  /** Open Graph content type. */
+  type?: "website" | "article";
+  /** ISO publication and modification dates for article pages. */
+  publishedTime?: string;
+  modifiedTime?: string;
 }
 
 function upsertMeta(selector: string, attrs: Record<string, string>) {
@@ -19,6 +24,10 @@ function upsertMeta(selector: string, attrs: Record<string, string>) {
     document.head.appendChild(el);
   }
   Object.entries(attrs).forEach(([k, v]) => el!.setAttribute(k, v));
+}
+
+function removeMeta(selector: string) {
+  document.head.querySelector(selector)?.remove();
 }
 
 function upsertLink(rel: string, href: string) {
@@ -32,7 +41,16 @@ function upsertLink(rel: string, href: string) {
 }
 
 /** Per-route head manager: title, description, canonical, OG/Twitter tags, optional JSON-LD. */
-export default function Seo({ title, description, path, schema, noindex }: SeoProps) {
+export default function Seo({
+  title,
+  description,
+  path,
+  schema,
+  noindex,
+  type = "website",
+  publishedTime,
+  modifiedTime,
+}: SeoProps) {
   useEffect(() => {
     document.title = title;
     const url = absoluteSiteUrl(path);
@@ -47,7 +65,23 @@ export default function Seo({ title, description, path, schema, noindex }: SeoPr
     upsertMeta('meta[property="og:title"]', { property: "og:title", content: title });
     upsertMeta('meta[property="og:description"]', { property: "og:description", content: description });
     upsertMeta('meta[property="og:url"]', { property: "og:url", content: url });
-    upsertMeta('meta[property="og:type"]', { property: "og:type", content: "website" });
+    upsertMeta('meta[property="og:type"]', { property: "og:type", content: type });
+    if (type === "article" && publishedTime) {
+      upsertMeta('meta[property="article:published_time"]', {
+        property: "article:published_time",
+        content: publishedTime,
+      });
+    } else {
+      removeMeta('meta[property="article:published_time"]');
+    }
+    if (type === "article" && modifiedTime) {
+      upsertMeta('meta[property="article:modified_time"]', {
+        property: "article:modified_time",
+        content: modifiedTime,
+      });
+    } else {
+      removeMeta('meta[property="article:modified_time"]');
+    }
     upsertMeta('meta[property="og:image"]', {
       property: "og:image",
       content: absoluteSiteUrl("/og-image.png"),
@@ -62,7 +96,7 @@ export default function Seo({ title, description, path, schema, noindex }: SeoPr
       name: "twitter:image",
       content: absoluteSiteUrl("/og-image.png"),
     });
-  }, [title, description, path, noindex]);
+  }, [title, description, path, noindex, type, publishedTime, modifiedTime]);
 
   // Inject per-route JSON-LD structured data; remove it again on unmount.
   useEffect(() => {

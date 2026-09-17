@@ -50,6 +50,8 @@ export interface ArticleSchemaMeta {
   path: string;
   title: string;
   standfirst: string;
+  datePublished: string;
+  dateModified: string;
 }
 
 /** Article schema for Insights articles, authored by the WardShift organization. */
@@ -59,17 +61,26 @@ export function articleSchema(meta: ArticleSchemaMeta) {
     "@type": "Article",
     headline: meta.title,
     description: meta.standfirst,
+    image: [absoluteUrl("/og-image.png")],
     author: {
       "@type": "Organization",
+      "@id": absoluteUrl("/#organization"),
       name: "WardShift",
       url: absoluteUrl("/"),
     },
     publisher: {
       "@type": "Organization",
+      "@id": absoluteUrl("/#organization"),
       name: "WardShift",
       url: absoluteUrl("/"),
+      logo: {
+        "@type": "ImageObject",
+        url: absoluteUrl("/logo.png"),
+      },
     },
-    datePublished: "2026-09-17",
+    datePublished: meta.datePublished,
+    dateModified: meta.dateModified,
+    inLanguage: "en-GB",
     mainEntityOfPage: {
       "@type": "WebPage",
       "@id": absoluteUrl(meta.path),
