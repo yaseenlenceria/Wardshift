@@ -52,7 +52,7 @@ export default function InsightsPreview() {
           className="relative mt-12 overflow-hidden rounded-[10px] shadow-card"
         >
           <img
-            src="/img-consultant-desk.jpg"
+            src="/img-consultant-desk.webp"
             alt="A consultant's desk with a laptop showing rising analytics, coffee and a notebook"
             className="h-52 w-full object-cover object-center sm:h-64"
             loading="lazy"

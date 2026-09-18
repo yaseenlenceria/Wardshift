@@ -70,7 +70,7 @@ export default function SystemMap() {
     <section id="system-map" className="relative scroll-mt-24 overflow-hidden bg-navy-950">
       {/* generated dark ascent ribbon, subtle background layer */}
       <img
-        src="/img-dark-ascent.jpg"
+        src="/img-dark-ascent.webp"
         alt=""
         aria-hidden="true"
         loading="lazy"

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en-GB">
+<html lang="en-US">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,11 +9,14 @@
       content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
     />
 
-    <!-- Favicon set (generated from /logo-mark.png; kept as fallback) -->
+    <!-- Favicon set (generated from /logo-mark.webp; kept as fallback) -->
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    <link rel="icon" type="image/png" href="/logo-mark.png" />
+    <link rel="icon" type="image/webp" href="/logo-mark.webp" />
+
+    <!-- Header logo is above the fold on every page — start fetching it early. -->
+    <link rel="preload" as="image" href="/logo.webp" fetchpriority="high" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -31,7 +34,7 @@
 
     <!-- Open Graph / Twitter defaults. -->
     <meta property="og:site_name" content="WardShift" />
-    <meta property="og:locale" content="en_GB" />
+    <meta property="og:locale" content="en_US" />
     <meta property="og:title" content="Private Practice Growth for Doctors & Consultants | WardShift" />
     <meta
       property="og:description"
@@ -61,11 +64,22 @@
             "@id": "https://wardshift.com/#organization",
             "name": "WardShift",
             "url": "https://wardshift.com/",
-            "logo": "https://wardshift.com/logo.png",
+            "logo": "https://wardshift.com/logo.webp",
+            "email": "yasin@wardshift.com",
+            "telephone": "+92-313-5181766",
             "sameAs": [
               "https://www.linkedin.com/company/wardshift",
+              "https://www.instagram.com/wardshift/",
+              "https://www.facebook.com/people/WardShift/61594568877306/",
               "https://www.youtube.com/@wardshift"
             ],
+            "contactPoint": {
+              "@type": "ContactPoint",
+              "contactType": "sales",
+              "email": "yasin@wardshift.com",
+              "telephone": "+92-313-5181766",
+              "availableLanguage": ["English"]
+            },
             "slogan": "The Growth Side of Private Practice",
             "description": "WardShift is the growth side of private practice — improving how patients discover your practice, understand your expertise, build trust and make contact, and how that entire journey is measured."
           },
@@ -75,7 +89,7 @@
             "url": "https://wardshift.com/",
             "name": "WardShift",
             "alternateName": "Ward Shift",
-            "inLanguage": "en-GB",
+            "inLanguage": "en-US",
             "publisher": { "@id": "https://wardshift.com/#organization" }
           },
           {
@@ -83,8 +97,10 @@
             "@id": "https://wardshift.com/#service",
             "name": "WardShift",
             "url": "https://wardshift.com/",
+            "email": "yasin@wardshift.com",
+            "telephone": "+92-313-5181766",
             "description": "Growth systems for private doctors and consultants: private practice websites, search visibility, patient acquisition, Google Ads, digital reputation, consultant positioning, practice enquiry systems, CRM follow-up and practice growth strategy.",
-            "areaServed": "International",
+            "areaServed": ["United States", "United Kingdom", "International"],
             "provider": { "@id": "https://wardshift.com/#organization" },
             "serviceType": [
               "Private Practice Websites",

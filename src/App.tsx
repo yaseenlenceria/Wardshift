@@ -38,7 +38,7 @@ function RouteLoading() {
   return (
     <div className="flex min-h-[60vh] items-center justify-center bg-navy-900">
       <img
-        src="/logo-mark-light.png"
+        src="/logo-mark-light.webp"
         alt="WardShift"
         className="h-10 w-auto animate-pulse"
         width={360}

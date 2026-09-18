@@ -7,8 +7,8 @@ import WordReveal from "@/components/WordReveal";
 import ContactForm from "@/components/pages/contact/ContactForm";
 import { fadeUp, staggerParent, usePrefersReducedMotion } from "@/lib/motion";
 
-/** Email chip: mono, click-to-copy with a 200ms "Copied" tooltip. */
-function EmailChip() {
+/** Contact chip: mono, click-to-copy with a short "Copied" tooltip. */
+function CopyChip({ value, label }: { value: string; label: string }) {
   const [copied, setCopied] = useState(false);
   const timer = useRef<number | null>(null);
 
@@ -20,7 +20,7 @@ function EmailChip() {
 
   const copy = async () => {
     try {
-      await navigator.clipboard.writeText("hello@wardshift.com");
+      await navigator.clipboard.writeText(value);
     } catch {
       // Clipboard unavailable — the address is visible text regardless.
     }
@@ -35,9 +35,9 @@ function EmailChip() {
         type="button"
         onClick={copy}
         className="group inline-flex items-center gap-2 rounded-full border border-grey-300 bg-white px-4 py-2 font-mono text-[13px] font-medium tracking-[0.02em] text-navy-800 transition-colors duration-150 hover:border-teal-500/50 hover:bg-teal-100"
-        aria-label="Copy email address hello@wardshift.com"
+        aria-label={`Copy ${label} ${value}`}
       >
-        hello@wardshift.com
+        {value}
         {copied ? (
           <Check className="h-3.5 w-3.5 text-teal-600" aria-hidden="true" />
         ) : (
@@ -95,8 +95,15 @@ export default function ContactHero() {
               right for your practice — send a message and we'll respond.
             </motion.p>
 
-            <motion.div variants={fadeUp} className="mt-7">
-              <EmailChip />
+            <motion.div variants={fadeUp} className="mt-7 flex flex-wrap items-center gap-3">
+              <CopyChip value="yasin@wardshift.com" label="email address" />
+              <CopyChip value="+92 31 35181766" label="phone number" />
+              <a
+                href="tel:+923135181766"
+                className="inline-flex items-center gap-2 rounded-full bg-navy-800 px-4 py-2 font-mono text-[13px] font-medium tracking-[0.02em] text-white transition-colors duration-150 hover:bg-teal-500 hover:text-navy-950"
+              >
+                Call +92 31 35181766
+              </a>
             </motion.div>
 
             <motion.div

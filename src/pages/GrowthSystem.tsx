@@ -109,7 +109,7 @@ export default function GrowthSystem() {
         />
         <div
           className="pointer-events-none absolute inset-0 opacity-[0.03]"
-          style={{ backgroundImage: "url(/noise.png)", backgroundSize: "512px 512px" }}
+          style={{ backgroundImage: "url(/noise.webp)", backgroundSize: "512px 512px" }}
           aria-hidden="true"
         />
 

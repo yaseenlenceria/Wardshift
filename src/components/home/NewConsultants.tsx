@@ -54,7 +54,7 @@ export default function NewConsultants() {
           className="overflow-hidden rounded-[10px] border border-grey-300 bg-paper shadow-card"
         >
           <img
-            src="/img-clinic-corridor.jpg"
+            src="/img-clinic-corridor.webp"
             alt="A modern private clinic corridor in soft daylight"
             className="h-44 w-full object-cover object-center"
             loading="lazy"

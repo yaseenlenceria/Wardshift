@@ -11,7 +11,7 @@ function AnimatedMark() {
   const reduced = usePrefersReducedMotion();
 
   if (reduced) {
-    return <img src="/logo-mark.png" alt="" className="h-16 w-auto" aria-hidden="true" />;
+    return <img src="/logo-mark.webp" alt="" className="h-16 w-auto" aria-hidden="true" />;
   }
 
   return (
@@ -22,7 +22,7 @@ function AnimatedMark() {
       transition={{ duration: 0.9, ease: EASE_OUT, delay: 0.15 }}
     >
       <motion.img
-        src="/logo-mark.png"
+        src="/logo-mark.webp"
         alt=""
         aria-hidden="true"
         className="h-16 w-auto"

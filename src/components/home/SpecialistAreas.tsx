@@ -76,7 +76,7 @@ export default function SpecialistAreas() {
             className="relative hidden lg:block"
           >
             <img
-              src="/img-clinic-interior.jpg"
+              src="/img-clinic-interior.webp"
               alt="A calm, premium private clinic reception in soft morning light"
               className="aspect-[7/8] w-full rounded-[10px] object-cover shadow-card"
               loading="lazy"

@@ -139,7 +139,7 @@ export default function SplitVisual() {
       />
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.03]"
-        style={{ backgroundImage: "url(/noise.png)", backgroundSize: "512px 512px" }}
+        style={{ backgroundImage: "url(/noise.webp)", backgroundSize: "512px 512px" }}
         aria-hidden="true"
       />
       {/* soft teal aura behind the bridge */}
@@ -218,7 +218,7 @@ export default function SplitVisual() {
                 aria-hidden="true"
               />
               <span className="flex h-24 w-24 items-center justify-center rounded-full border-2 border-teal-400 bg-navy-900 shadow-[0_0_36px_rgba(20,184,166,0.25)]">
-                <img src="/logo-mark-light.png" alt="" className="h-10 w-auto" />
+                <img src="/logo-mark-light.webp" alt="" className="h-10 w-auto" />
               </span>
             </span>
 

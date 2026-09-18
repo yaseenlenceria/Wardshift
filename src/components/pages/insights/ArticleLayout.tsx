@@ -175,7 +175,7 @@ export default function ArticleLayout({ meta, related, children, figure }: Artic
           >
             {meta.category} · By WardShift ·{" "}
             <time dateTime={meta.datePublished}>
-              {new Intl.DateTimeFormat("en-GB", {
+              {new Intl.DateTimeFormat("en-US", {
                 day: "numeric",
                 month: "short",
                 year: "numeric",

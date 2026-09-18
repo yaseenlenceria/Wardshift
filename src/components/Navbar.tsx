@@ -229,9 +229,13 @@ export default function Navbar() {
       <div className="mx-auto flex h-full max-w-site items-center justify-between px-6">
         <Link to="/" aria-label="WardShift — home" className="flex items-center">
           <img
-            src={drawerOpen ? "/logo-light.png" : "/logo.png"}
+            src={drawerOpen ? "/logo-light.webp" : "/logo.webp"}
             alt="WardShift — The Growth Side of Private Practice"
-            className={cn("w-auto transition-all duration-200", compactHeader ? "h-9" : "h-11")}
+            width={575}
+            height={389}
+            fetchPriority="high"
+            decoding="async"
+            className={cn("w-auto transition-all duration-200", compactHeader ? "h-11" : "h-14")}
           />
         </Link>
 

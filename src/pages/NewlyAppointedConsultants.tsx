@@ -12,7 +12,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { EASE_OUT, fadeUp, staggerParent, usePrefersReducedMotion } from "@/lib/motion";
-import { faqPageSchema } from "@/lib/schema";
+import { breadcrumbSchema, faqPageSchema } from "@/lib/schema";
 import { cn } from "@/lib/utils";
 
 /* ---------------------------------- data ---------------------------------- */
@@ -350,7 +350,17 @@ export default function NewlyAppointedConsultants() {
         title="Newly Appointed Consultants: First 90 Days | WardShift"
         description="Starting private practice? Build the digital foundation correctly from day one — positioning, website, search, reputation and enquiries. First 90 Days framework."
         path="/newly-appointed-consultants/"
-        schema={faqPageSchema(FAQS)}
+        schema={[
+          faqPageSchema(FAQS),
+          breadcrumbSchema(
+            [
+              { label: "Home", href: "/" },
+              { label: "Who We Help", href: "/who-we-help/" },
+              { label: "Newly Appointed Consultants" },
+            ],
+            "/newly-appointed-consultants/",
+          ),
+        ]}
       />
 
       {/* Section 1 — Dark hero */}

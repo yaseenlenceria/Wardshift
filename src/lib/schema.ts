@@ -75,12 +75,12 @@ export function articleSchema(meta: ArticleSchemaMeta) {
       url: absoluteUrl("/"),
       logo: {
         "@type": "ImageObject",
-        url: absoluteUrl("/logo.png"),
+        url: absoluteUrl("/logo.webp"),
       },
     },
     datePublished: meta.datePublished,
     dateModified: meta.dateModified,
-    inLanguage: "en-GB",
+    inLanguage: "en-US",
     mainEntityOfPage: {
       "@type": "WebPage",
       "@id": absoluteUrl(meta.path),

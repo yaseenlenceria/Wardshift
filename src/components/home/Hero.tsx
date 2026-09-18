@@ -8,10 +8,11 @@ import { EASE_OUT, usePrefersReducedMotion } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 
 /* ---------- search results page visual ---------- */
+/* Fictional, illustrative sample data — labelled as an example on the card. */
 const LOCAL_RESULTS = [
   {
-    name: "Competitor A",
-    meta: "Private orthopaedic clinic",
+    name: "Nearby orthopaedic group",
+    meta: "Sample clinic",
     beforePosition: 1,
     afterPosition: 2,
     rating: "4.9",
@@ -28,8 +29,8 @@ const LOCAL_RESULTS = [
     active: true,
   },
   {
-    name: "Competitor B",
-    meta: "Sports injury consultant",
+    name: "Sports injury center",
+    meta: "Sample clinic",
     beforePosition: 4,
     afterPosition: 4,
     rating: "4.8",
@@ -108,11 +109,14 @@ function SearchResultsVisual({ reduced }: { reduced: boolean }) {
           </span>
         </div>
 
-        {/* Local Results Panel (Full Width) */}
+        {/* Local Results Panel (Full Width) — sample data, labelled illustrative */}
         <div className="rounded-[12px] border border-grey-200 bg-white p-4 sm:p-5">
-          <div className="border-b border-grey-100 pb-2.5">
+          <div className="flex items-center justify-between border-b border-grey-100 pb-2.5">
             <p className="font-mono text-[10.5px] font-semibold uppercase tracking-[0.14em] text-grey-500">
               Local results
+            </p>
+            <p className="font-mono text-[10.5px] uppercase tracking-[0.14em] text-grey-400">
+              Illustrative example
             </p>
           </div>
 
@@ -151,7 +155,7 @@ function SearchResultsVisual({ reduced }: { reduced: boolean }) {
                         : "bg-grey-100 text-grey-600",
                     )}
                   >
-                    POS {result.position}
+                    #{result.position}
                   </span>
                 </div>
                 <div className="mt-2.5">
@@ -168,7 +172,7 @@ function SearchResultsVisual({ reduced }: { reduced: boolean }) {
             Your Practice | Consultant Knee Specialist
           </p>
           <p className="mt-0.5 text-[11.5px] font-medium text-[#006621]">
-            www.example.co.uk/knee-specialist
+            www.example.com/knee-specialist
           </p>
           <p className="mt-1.5 text-[12px] leading-relaxed text-grey-600">
             Shows the practice moving from position 3 to position 1 as visibility improves.

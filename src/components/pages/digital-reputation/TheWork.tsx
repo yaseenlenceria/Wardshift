@@ -34,7 +34,7 @@ export default function TheWork() {
     <section className="relative overflow-hidden bg-navy-900">
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.03]"
-        style={{ backgroundImage: "url(/noise.png)", backgroundSize: "512px 512px" }}
+        style={{ backgroundImage: "url(/noise.webp)", backgroundSize: "512px 512px" }}
         aria-hidden="true"
       />
       <div className="relative mx-auto max-w-site px-6 py-20 lg:py-32">

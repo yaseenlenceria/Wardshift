@@ -1,10 +1,16 @@
 import { Link } from "react-router";
-import { Linkedin, Youtube } from "lucide-react";
+import { Facebook, Instagram, Linkedin, Youtube } from "lucide-react";
 import { SERVICE_LINKS } from "@/lib/site";
 import { REOPEN_EVENT } from "@/components/CookieConsent";
 
+export const CONTACT_EMAIL = "yasin@wardshift.com";
+export const CONTACT_PHONE_DISPLAY = "+92 31 35181766";
+export const CONTACT_PHONE_HREF = "tel:+923135181766";
+
 const SOCIAL_LINKS = [
   { label: "WardShift on LinkedIn", href: "https://www.linkedin.com/company/wardshift", Icon: Linkedin },
+  { label: "WardShift on Instagram", href: "https://www.instagram.com/wardshift/", Icon: Instagram },
+  { label: "WardShift on Facebook", href: "https://www.facebook.com/people/WardShift/61594568877306/", Icon: Facebook },
   { label: "WardShift on YouTube", href: "https://www.youtube.com/@wardshift", Icon: Youtube },
 ];
 
@@ -33,15 +39,37 @@ export default function Footer() {
           <div>
             <Link to="/" aria-label="WardShift — home" className="inline-block">
               <img
-                src="/logo-light.png"
+                src="/logo-light.webp"
                 alt="WardShift — The Growth Side of Private Practice"
-                className="h-14 w-auto"
+                width={575}
+                height={389}
+                loading="lazy"
+                decoding="async"
+                className="h-16 w-auto"
               />
             </Link>
             <p className="mt-5 max-w-xs text-[15px] leading-relaxed text-navy-100/80">
               The growth side of private practice — strategy, presence and enquiry systems for private
               doctors, consultants and specialists.
             </p>
+            <div className="mt-5 space-y-1.5 text-[14px]">
+              <p>
+                <a
+                  href={`mailto:${CONTACT_EMAIL}`}
+                  className="text-navy-100/80 transition-colors duration-150 hover:text-teal-400"
+                >
+                  {CONTACT_EMAIL}
+                </a>
+              </p>
+              <p>
+                <a
+                  href={CONTACT_PHONE_HREF}
+                  className="text-navy-100/80 transition-colors duration-150 hover:text-teal-400"
+                >
+                  {CONTACT_PHONE_DISPLAY}
+                </a>
+              </p>
+            </div>
             <p className="mt-5 font-mono text-[11px] uppercase tracking-[0.14em] text-teal-400">
               Growth services, not medical advice
             </p>
@@ -126,10 +154,10 @@ export default function Footer() {
           <p className="text-[13px] text-navy-100/60">
             © {year} WardShift. All rights reserved. ·{" "}
             <a
-              href="mailto:hello@wardshift.com"
+              href={`mailto:${CONTACT_EMAIL}`}
               className="transition-colors duration-150 hover:text-teal-400"
             >
-              hello@wardshift.com
+              {CONTACT_EMAIL}
             </a>
           </p>
           <p className="mt-2 text-[13px] text-navy-100/60">
