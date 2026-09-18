@@ -155,18 +155,5 @@
         }
       ]
     }
-  ],
-  "redirects": [
-    {
-      "source": "/:path*",
-      "has": [
-        {
-          "type": "host",
-          "value": "wardshift.com"
-        }
-      ],
-      "destination": "https://www.wardshift.com/:path*",
-      "permanent": true
-    }
   ]
 }

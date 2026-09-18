@@ -1,5 +1,5 @@
 export const SITE_ORIGIN =
-  (import.meta.env.VITE_SITE_URL?.replace(/\/+$/, "") || "https://www.wardshift.com");
+  (import.meta.env.VITE_SITE_URL?.replace(/\/+$/, "") || "https://wardshift.com");
 
 export function absoluteSiteUrl(path = "/") {
   const normalizedPath = path.startsWith("/") ? path : `/${path}`;

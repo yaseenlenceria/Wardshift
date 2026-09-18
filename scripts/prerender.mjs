@@ -19,7 +19,7 @@ import { ROUTES } from "./routes.mjs";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const DIST = path.resolve(__dirname, "../dist");
 
-const PUBLIC_ORIGIN = process.env.PRERENDER_ORIGIN ?? "https://www.wardshift.com";
+const PUBLIC_ORIGIN = process.env.PRERENDER_ORIGIN ?? "https://wardshift.com";
 const REQUIRE_PRERENDER = process.env.REQUIRE_PRERENDER === "1";
 const ON_VERCEL = process.env.VERCEL === "1";
 

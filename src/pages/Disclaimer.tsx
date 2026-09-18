@@ -109,8 +109,8 @@ export default function Disclaimer() {
           "@context": "https://schema.org",
           "@type": "BreadcrumbList",
           itemListElement: [
-            { "@type": "ListItem", position: 1, name: "Home", item: "https://www.wardshift.com/" },
-            { "@type": "ListItem", position: 2, name: "Disclaimer", item: "https://www.wardshift.com/disclaimer/" },
+            { "@type": "ListItem", position: 1, name: "Home", item: "https://wardshift.com/" },
+            { "@type": "ListItem", position: 2, name: "Disclaimer", item: "https://wardshift.com/disclaimer/" },
           ],
         }}
       />

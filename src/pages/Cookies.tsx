@@ -151,8 +151,8 @@ export default function Cookies() {
           "@context": "https://schema.org",
           "@type": "BreadcrumbList",
           itemListElement: [
-            { "@type": "ListItem", position: 1, name: "Home", item: "https://www.wardshift.com/" },
-            { "@type": "ListItem", position: 2, name: "Cookie Policy", item: "https://www.wardshift.com/cookies/" },
+            { "@type": "ListItem", position: 1, name: "Home", item: "https://wardshift.com/" },
+            { "@type": "ListItem", position: 2, name: "Cookie Policy", item: "https://wardshift.com/cookies/" },
           ],
         }}
       />
