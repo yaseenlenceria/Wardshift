@@ -1,71 +1,11 @@
-import { memo, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router";
 import { motion, useScroll, useTransform } from "framer-motion";
-import type { MouseEvent, ReactNode } from "react";
+import type { MouseEvent } from "react";
 import { ArrowRight, MapPin, Search, Star } from "lucide-react";
-import IllustrativeBadge from "@/components/IllustrativeBadge";
 import WordReveal from "@/components/WordReveal";
 import { EASE_OUT, usePrefersReducedMotion } from "@/lib/motion";
 import { cn } from "@/lib/utils";
-
-/* ---------- idle float wrapper (isolated perpetual animation) ---------- */
-const Float = memo(function Float({
-  children,
-  phase = 0,
-  disabled = false,
-}: {
-  children: ReactNode;
-  phase?: number;
-  disabled?: boolean;
-}) {
-  if (disabled) return <>{children}</>;
-  return (
-    <motion.div
-      animate={{ y: [0, -4, 0, 4, 0] }}
-      transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: phase }}
-    >
-      {children}
-    </motion.div>
-  );
-});
-
-/* ---------- looping typewriter ---------- */
-function useTypewriter(text: string, disabled: boolean) {
-  const [shown, setShown] = useState(disabled ? text : "");
-  useEffect(() => {
-    if (disabled) {
-      const timer = setTimeout(() => setShown(text), 0);
-      return () => clearTimeout(timer);
-    }
-    let i = 0;
-    let deleting = false;
-    let timer: ReturnType<typeof setTimeout>;
-    const tick = () => {
-      if (!deleting) {
-        i += 1;
-        setShown(text.slice(0, i));
-        if (i >= text.length) {
-          deleting = true;
-          timer = setTimeout(tick, 3400); // hold the finished query
-          return;
-        }
-        timer = setTimeout(tick, 55 + Math.random() * 55);
-      } else {
-        i -= 2;
-        setShown(text.slice(0, Math.max(0, i)));
-        if (i <= 0) {
-          deleting = false;
-          timer = setTimeout(tick, 700);
-          return;
-        }
-        timer = setTimeout(tick, 22);
-      }
-    };
-    timer = setTimeout(tick, 500);
-    return () => clearTimeout(timer);
-  }, [text, disabled]);
-  return shown;
-}
 
 /* ---------- search results page visual ---------- */
 const LOCAL_RESULTS = [
@@ -100,15 +40,16 @@ const LOCAL_RESULTS = [
 
 function StarRating({ value, reviews }: { value: string; reviews: string }) {
   return (
-    <span className="flex items-center gap-1 text-[11px] text-grey-500">
+    <div className="flex items-center gap-1.5 text-[12px] text-grey-500">
+      <MapPin className="h-3.5 w-3.5 shrink-0 text-grey-400" aria-hidden="true" />
       <span className="font-semibold text-amber-500">{value}</span>
       <span className="flex text-amber-400" aria-hidden="true">
         {[0, 1, 2, 3, 4].map((i) => (
-          <Star key={i} className="h-2.5 w-2.5 fill-current stroke-current" />
+          <Star key={i} className="h-3 w-3 fill-current stroke-current" />
         ))}
       </span>
-      {reviews}
-    </span>
+      <span>{reviews}</span>
+    </div>
   );
 }
 
@@ -121,8 +62,8 @@ function SearchResultsVisual({ reduced }: { reduced: boolean }) {
       return () => clearTimeout(timer);
     }
 
-    const first = setTimeout(() => setImproved(true), 2200);
-    const interval = setInterval(() => setImproved((current) => !current), 6200);
+    const first = setTimeout(() => setImproved(true), 2500);
+    const interval = setInterval(() => setImproved((current) => !current), 6000);
     return () => {
       clearTimeout(first);
       clearInterval(interval);
@@ -137,245 +78,120 @@ function SearchResultsVisual({ reduced }: { reduced: boolean }) {
     .sort((a, b) => a.position - b.position);
 
   return (
-    <div className="mt-5 overflow-hidden rounded-[12px] border border-grey-300 bg-[#f8fafc] shadow-card">
-      <div className="flex items-center gap-1.5 border-b border-grey-300 bg-white px-4 py-3">
-        <span className="h-2.5 w-2.5 rounded-full bg-[#ef4444]" aria-hidden="true" />
-        <span className="h-2.5 w-2.5 rounded-full bg-[#f59e0b]" aria-hidden="true" />
-        <span className="h-2.5 w-2.5 rounded-full bg-[#22c55e]" aria-hidden="true" />
-        <span className="ml-2 truncate rounded-full bg-grey-100 px-3 py-1 font-mono text-[10px] text-grey-500">
-          google.com/search?q=knee+specialist+near+me
-        </span>
+    <motion.div
+      className="w-full overflow-hidden rounded-[16px] border border-grey-200 bg-white shadow-[0_20px_50px_rgba(15,23,42,0.08)]"
+      initial={reduced ? false : { opacity: 0, y: 24 }}
+      animate={reduced ? undefined : { opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, ease: EASE_OUT, delay: 0.4 }}
+    >
+      {/* Browser top chrome */}
+      <div className="flex items-center border-b border-grey-200 bg-[#fbfcfd] px-4 py-3 sm:px-5">
+        <div className="flex items-center gap-1.5 shrink-0">
+          <span className="h-3 w-3 rounded-full bg-[#ef4444]" aria-hidden="true" />
+          <span className="h-3 w-3 rounded-full bg-[#f59e0b]" aria-hidden="true" />
+          <span className="h-3 w-3 rounded-full bg-[#22c55e]" aria-hidden="true" />
+        </div>
+        <div className="mx-auto flex max-w-[380px] flex-1 items-center justify-center">
+          <span className="truncate rounded-full bg-[#f1f5f9] px-4 py-1 font-mono text-[10.5px] text-grey-600 sm:text-[11px]">
+            google.com/search?q=knee+specialist+near+me
+          </span>
+        </div>
       </div>
 
-      <div className="p-4">
-        <div className="rounded-full border border-grey-300 bg-white px-4 py-2.5 shadow-[0_10px_24px_rgba(15,23,42,0.06)]">
-          <div className="flex items-center gap-2.5">
-            <Search className="h-4 w-4 shrink-0 text-grey-500" aria-hidden="true" />
-            <span className="truncate text-[13px] text-navy-800">knee specialist near me</span>
-          </div>
+      {/* Card body */}
+      <div className="space-y-4 p-4 sm:p-6">
+        {/* Search bar */}
+        <div className="flex items-center gap-3 rounded-full border border-grey-200 bg-white px-4 py-3 shadow-[0_2px_8px_rgba(15,23,42,0.04)] sm:px-5">
+          <Search className="h-4 w-4 shrink-0 text-grey-400" aria-hidden="true" />
+          <span className="truncate text-[14px] font-medium text-navy-900">
+            knee specialist near me
+          </span>
         </div>
 
-        <div className="mt-4 grid gap-3 sm:grid-cols-[0.9fr_1.1fr]">
-          <div className="relative min-h-[166px] overflow-hidden rounded-[10px] border border-grey-300 bg-[#dbeafe]">
-            <div className="absolute inset-0 opacity-70" style={{ backgroundImage: "url(/texture-grid.svg)", backgroundSize: "180px 180px" }} />
-            <div className="absolute left-5 top-5 h-20 w-24 rounded-full border border-white/80 bg-white/40" />
-            <div className="absolute bottom-5 right-4 h-24 w-28 rounded-full border border-white/80 bg-white/40" />
-            {positionedResults.map((result, i) => (
-              <motion.span
+        {/* Local Results Panel (Full Width) */}
+        <div className="rounded-[12px] border border-grey-200 bg-white p-4 sm:p-5">
+          <div className="border-b border-grey-100 pb-2.5">
+            <p className="font-mono text-[10.5px] font-semibold uppercase tracking-[0.14em] text-grey-500">
+              Local results
+            </p>
+          </div>
+
+          <ul className="mt-3 space-y-2.5">
+            {positionedResults.map((result) => (
+              <motion.li
                 key={result.name}
-                initial={reduced ? false : { opacity: 0, y: 8, scale: 0.92 }}
-                animate={reduced ? undefined : { opacity: 1, y: improved && result.active ? -18 : 0, scale: result.active && improved ? 1.08 : 1 }}
-                transition={{ duration: 0.55, ease: EASE_OUT, delay: 0.2 + i * 0.08 }}
+                layout="position"
+                transition={{ duration: 0.55, ease: EASE_OUT }}
                 className={cn(
-                  "absolute flex h-8 w-8 items-center justify-center rounded-full border-2 border-white text-[11px] font-bold shadow-card",
+                  "rounded-[10px] border p-3.5 transition-all duration-300",
                   result.active
-                    ? "left-[48%] top-[48%] bg-teal-500 text-navy-950"
-                    : result.name === "Competitor A"
-                      ? "left-[24%] top-[26%] bg-navy-800 text-white"
-                      : "right-[18%] top-[62%] bg-white text-navy-800",
+                    ? "border-teal-400/90 bg-[#f0fdfa] shadow-[0_0_18px_rgba(20,184,166,0.12)]"
+                    : "border-grey-200 bg-white hover:border-grey-300",
                 )}
               >
-                {result.position}
-              </motion.span>
+                <div className="flex items-start justify-between gap-3">
+                  <div>
+                    <p
+                      className={cn(
+                        "text-[14px] leading-tight",
+                        result.active ? "font-bold text-navy-900" : "font-semibold text-grey-800",
+                      )}
+                    >
+                      {result.name}
+                    </p>
+                    <p className="mt-0.5 text-[12px] leading-snug text-grey-500">
+                      {result.meta}
+                    </p>
+                  </div>
+                  <span
+                    className={cn(
+                      "rounded-full px-2.5 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-wider",
+                      result.active
+                        ? "border border-teal-200/80 bg-white text-teal-600 shadow-2xs"
+                        : "bg-grey-100 text-grey-600",
+                    )}
+                  >
+                    POS {result.position}
+                  </span>
+                </div>
+                <div className="mt-2.5">
+                  <StarRating value={result.rating} reviews={result.reviews} />
+                </div>
+              </motion.li>
             ))}
-          </div>
-
-          <div className="rounded-[10px] border border-grey-300 bg-white p-3">
-            <div className="flex items-center justify-between gap-3 border-b border-grey-300 pb-2">
-              <p className="font-mono text-[10px] font-medium uppercase tracking-[0.14em] text-grey-500">
-                Local results
-              </p>
-              <p className="font-mono text-[10px] font-medium uppercase tracking-[0.14em] text-grey-500">
-                {improved ? "WardShift lift" : "Today"}
-              </p>
-            </div>
-
-            <ul className="mt-2 space-y-2">
-              {positionedResults.map((result, i) => (
-                <motion.li
-                  key={result.name}
-                  layout="position"
-                  initial={reduced ? false : { opacity: 0, y: 12 }}
-                  animate={reduced ? undefined : { opacity: 1, y: 0 }}
-                  transition={{ duration: 0.55, ease: EASE_OUT, delay: 0.25 + i * 0.08 }}
-                  className={cn(
-                    "rounded-lg border p-3",
-                    result.active
-                      ? improved
-                        ? "border-teal-500 bg-teal-100/70 shadow-[0_0_22px_rgba(20,184,166,0.16)]"
-                        : "border-teal-500/60 bg-teal-100/45"
-                      : "border-grey-300 bg-white",
-                  )}
-                >
-                  <div className="flex items-start justify-between gap-3">
-                    <div>
-                      <p className={cn("text-[13px] font-semibold leading-tight", result.active ? "text-navy-800" : "text-grey-700")}>
-                        {result.name}
-                      </p>
-                      <p className="mt-1 text-[11px] leading-snug text-grey-500">{result.meta}</p>
-                    </div>
-                    <span className={cn("rounded-full px-2 py-1 font-mono text-[9px] font-semibold uppercase tracking-[0.08em]", result.active ? "bg-white text-teal-600" : "bg-grey-100 text-grey-500")}>
-                      Pos {result.position}
-                    </span>
-                  </div>
-                  <div className="mt-2 flex items-center gap-2">
-                    <MapPin className="h-3 w-3 text-grey-400" aria-hidden="true" />
-                    <StarRating value={result.rating} reviews={result.reviews} />
-                  </div>
-                </motion.li>
-              ))}
-            </ul>
-          </div>
+          </ul>
         </div>
 
-        <div className="mt-3 rounded-[10px] border border-grey-300 bg-white p-3">
-          <p className="text-[12px] font-semibold text-[#1a0dab]">Your Practice | Consultant Knee Specialist</p>
-          <p className="mt-1 text-[11px] text-[#006621]">wardshift-example.co.uk/knee-specialist</p>
-          <p className="mt-1 text-[11px] leading-snug text-grey-500">
-            The visual shows the practice moving from position 3 to position 1 as visibility improves.
+        {/* Bottom organic Google result */}
+        <div className="rounded-[12px] border border-grey-200 bg-white p-4 sm:p-5">
+          <p className="text-[13px] font-semibold text-[#1a0dab] sm:text-[14px]">
+            Your Practice | Consultant Knee Specialist
+          </p>
+          <p className="mt-0.5 text-[11.5px] font-medium text-[#006621]">
+            www.example.co.uk/knee-specialist
+          </p>
+          <p className="mt-1.5 text-[12px] leading-relaxed text-grey-600">
+            Shows the practice moving from position 3 to position 1 as visibility improves.
           </p>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
-/* ---------- enquiry notification (appears, rests, repeats) ---------- */
-const EnquiryNote = memo(function EnquiryNote({ reduced }: { reduced: boolean }) {
-  if (reduced) {
-    return (
-      <div className="flex items-center gap-2.5 rounded-lg border border-teal-500/40 bg-white px-3.5 py-2.5 shadow-card">
-        <span className="h-2 w-2 rounded-full bg-teal-500" aria-hidden="true" />
-        <span className="text-[12px] font-medium text-navy-800">New appointment enquiry received</span>
-      </div>
-    );
-  }
-  return (
-    <motion.div
-      className="flex items-center gap-2.5 rounded-lg border border-teal-500/40 bg-white px-3.5 py-2.5 shadow-card"
-      animate={{ opacity: [0, 1, 1, 0], y: [6, 0, 0, -4] }}
-      transition={{ duration: 6, times: [0, 0.12, 0.82, 1], repeat: Infinity, ease: "easeInOut" }}
-    >
-      <span className="relative flex h-2 w-2" aria-hidden="true">
-        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-teal-500 opacity-50 motion-reduce:hidden" />
-        <span className="relative inline-flex h-2 w-2 rounded-full bg-teal-500" />
-      </span>
-      <span className="text-[12px] font-medium text-navy-800">New appointment enquiry received</span>
-    </motion.div>
-  );
-});
-
 /* ---------- hero visual ---------- */
-
-const JOURNEY_STEPS = ["Potential patient", "Search", "Result", "Profile", "Website", "Enquiry"];
-
-const CHIPS = [
-  { label: "+12 appointment enquiries", className: "-left-3 top-[6%] sm:-left-8", phase: 0.6 },
-  { label: "4.9 ★ patient rating", className: "-right-2 top-[34%] sm:-right-6", phase: 1.8 },
-  { label: "Visibility ↑ 34%", className: "-left-2 bottom-[16%] sm:-left-7", phase: 3.0 },
-];
-
 function HeroVisual({ reduced }: { reduced: boolean }) {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
-  const parallaxY = useTransform(scrollYProgress, [0, 1], [0, -40]);
-  const query = useTypewriter("knee specialist near me", reduced);
+  const parallaxY = useTransform(scrollYProgress, [0, 1], [0, -30]);
 
   return (
-    <motion.div ref={ref} style={reduced ? undefined : { y: parallaxY }} className="relative">
-      {/* mini journey strip */}
-      <ol className="mb-7 flex flex-wrap items-center gap-x-2 gap-y-1.5 font-mono text-[10px] font-medium uppercase tracking-[0.12em] text-grey-500">
-        {JOURNEY_STEPS.map((label, i) => (
-          <li key={label} className="flex items-center gap-2">
-            {label}
-            {i < JOURNEY_STEPS.length - 1 && (
-              <span className="text-teal-500" aria-hidden="true">→</span>
-            )}
-          </li>
-        ))}
-      </ol>
-
-      <div className="relative">
-        {/* slowly drawing graph line behind the card */}
-        <svg
-          viewBox="0 0 440 560"
-          className="pointer-events-none absolute inset-0 h-full w-full"
-          fill="none"
-          aria-hidden="true"
-        >
-          <motion.path
-            d="M-10 520 C 80 500, 150 470, 220 430 S 360 330, 460 260"
-            stroke="#14B8A6"
-            strokeOpacity="0.35"
-            strokeWidth="1.5"
-            strokeDasharray="5 6"
-            initial={reduced ? undefined : { pathLength: 0 }}
-            animate={reduced ? undefined : { pathLength: 1 }}
-            transition={{ duration: 2.6, ease: "easeInOut", delay: 0.8 }}
-          />
-        </svg>
-
-        {/* main composed card */}
-        <motion.div
-          className="relative z-10 rounded-[10px] border border-grey-300 bg-white p-5 shadow-card sm:p-6"
-          initial={reduced ? false : { opacity: 0, y: 28 }}
-          animate={reduced ? undefined : { opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: EASE_OUT, delay: 0.5 }}
-        >
-          {/* search box */}
-          <div className="flex items-center gap-2.5 rounded-full border border-grey-300 bg-paper px-4 py-3">
-            <Search className="h-4 w-4 shrink-0 text-grey-500" aria-hidden="true" />
-            <span className="min-h-[20px] text-[14px] text-grey-700">
-              {query}
-              <span
-                className="ml-0.5 inline-block h-4 w-px translate-y-[3px] animate-pulse bg-teal-500 motion-reduce:animate-none"
-                aria-hidden="true"
-              />
-            </span>
-          </div>
-
-          {/* search demand */}
-          <div className="mt-3.5 flex flex-wrap items-center justify-between gap-2">
-            <p className="font-mono text-[10px] font-medium uppercase tracking-[0.12em] text-grey-500">
-              Search demand — <span className="text-navy-800">2,400 searches / month</span>
-            </p>
-            <IllustrativeBadge className="px-2 py-0.5 text-[9px]" />
-          </div>
-
-          <SearchResultsVisual reduced={reduced} />
-        </motion.div>
-
-        {/* enquiry notification */}
-        <motion.div
-          className="relative z-20 mt-4 flex justify-end pr-1 sm:pr-4"
-          initial={reduced ? false : { opacity: 0, y: 16 }}
-          animate={reduced ? undefined : { opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: EASE_OUT, delay: 0.75 }}
-        >
-          <EnquiryNote reduced={reduced} />
-        </motion.div>
-
-        {/* floating story chips */}
-        {CHIPS.map((chip) => (
-          <motion.div
-            key={chip.label}
-            className={cn("absolute z-30 hidden sm:block", chip.className)}
-            initial={reduced ? false : { opacity: 0, scale: 0.9 }}
-            animate={reduced ? undefined : { opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, ease: EASE_OUT, delay: 1.1 + chip.phase * 0.3 }}
-          >
-            <Float phase={chip.phase} disabled={reduced}>
-              <span className="block rounded-full border border-grey-300 bg-white px-3.5 py-2 font-mono text-[10.5px] font-medium tracking-[0.04em] text-navy-800 shadow-card">
-                {chip.label}
-              </span>
-            </Float>
-          </motion.div>
-        ))}
-      </div>
-
-      <p className="mt-6 font-mono text-[10px] font-medium uppercase tracking-[0.12em] text-grey-500">
-        Illustrative example — sample data throughout
-      </p>
+    <motion.div
+      ref={ref}
+      style={reduced ? undefined : { y: parallaxY }}
+      className="relative mx-auto w-full max-w-[560px] lg:max-w-none"
+    >
+      <SearchResultsVisual reduced={reduced} />
     </motion.div>
   );
 }

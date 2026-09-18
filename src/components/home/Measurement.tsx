@@ -33,12 +33,6 @@ const LEGEND = [
   "Appointment enquiries ↑",
 ];
 
-const GRAPH_CARDS = [
-  { label: "+34% visibility", className: "left-[4%] top-[8%]", delay: 1.1 },
-  { label: "+18 calls", className: "right-[30%] top-[2%]", delay: 1.3 },
-  { label: "7 new enquiry forms", className: "bottom-[10%] left-[30%]", delay: 1.5 },
-  { label: "Top 3 — “knee specialist…”", className: "right-[3%] bottom-[22%]", delay: 1.7 },
-];
 
 /** Large growth graph: Month 1 → Month 6, line draws on scroll, floating sample cards. */
 function GrowthGraph() {
@@ -132,19 +126,6 @@ function GrowthGraph() {
           <circle cx="700" cy="60" r="4" fill="#2DD4BF" />
         </svg>
 
-        {/* floating sample cards */}
-        {GRAPH_CARDS.map((card) => (
-          <motion.div
-            key={card.label}
-            className={`absolute hidden rounded-lg border border-teal-400/30 bg-navy-900/90 px-3.5 py-2 font-mono text-[11px] font-medium tracking-[0.04em] text-teal-100 shadow-[0_0_24px_rgba(20,184,166,0.12)] md:block ${card.className}`}
-            initial={reduced ? false : { opacity: 0, y: 12 }}
-            whileInView={reduced ? undefined : { opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, ease: EASE_OUT, delay: card.delay }}
-          >
-            {card.label}
-          </motion.div>
-        ))}
       </div>
 
       <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.12em] text-navy-100/50">
