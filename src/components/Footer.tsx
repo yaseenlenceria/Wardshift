@@ -8,10 +8,10 @@ export const CONTACT_PHONE_DISPLAY = "+92 31 35181766";
 export const CONTACT_PHONE_HREF = "tel:+923135181766";
 
 const SOCIAL_LINKS = [
-  { label: "WardShift on LinkedIn", href: "https://www.linkedin.com/company/wardshift", Icon: Linkedin },
+  { label: "WardShift on LinkedIn", href: "https://www.linkedin.com/in/yasin-wardshift/", Icon: Linkedin },
   { label: "WardShift on Instagram", href: "https://www.instagram.com/wardshift/", Icon: Instagram },
-  { label: "WardShift on Facebook", href: "https://www.facebook.com/people/WardShift/61594568877306/", Icon: Facebook },
-  { label: "WardShift on YouTube", href: "https://www.youtube.com/@wardshift", Icon: Youtube },
+  { label: "WardShift on Facebook", href: "https://www.facebook.com/profile.php?id=61594568877306", Icon: Facebook },
+  { label: "WardShift on YouTube", href: "https://www.youtube.com/@WardShift-o3v", Icon: Youtube },
 ];
 
 const COMPANY_LINKS = [
