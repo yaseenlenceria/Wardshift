@@ -5,7 +5,8 @@ import PositioningHero from "@/components/pages/consultant-positioning/Positioni
 import PositioningCovers from "@/components/pages/consultant-positioning/PositioningCovers";
 import ClaritySection from "@/components/pages/consultant-positioning/ClaritySection";
 import PositioningDiagram from "@/components/pages/consultant-positioning/PositioningDiagram";
-import PositioningFaq from "@/components/pages/consultant-positioning/PositioningFaq";
+import PositioningFaq, { FAQS as POSITIONING_FAQS } from "@/components/pages/consultant-positioning/PositioningFaq";
+import { faqPageSchema } from "@/lib/schema";
 
 export default function ConsultantPositioning() {
   return (
@@ -14,6 +15,7 @@ export default function ConsultantPositioning() {
         title="Consultant Positioning for Private Practice | WardShift"
         description="Patients don't think in clinical terms. WardShift helps consultants position their specialty, conditions and procedures clearly — without oversimplifying."
         path="/consultant-positioning/"
+        schema={faqPageSchema(POSITIONING_FAQS)}
       />
       <PositioningHero />
       <PositioningCovers />

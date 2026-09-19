@@ -6,7 +6,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
-const FAQS = [
+export const FAQS = [
   {
     q: "Is this personal branding?",
     a: "No — there are no logos and no slogans. Positioning is the accurate, structured presentation of real expertise: what you do, for whom, and where, stated so patients can actually understand it.",

@@ -5,7 +5,8 @@ import ReputationHero from "@/components/pages/digital-reputation/ReputationHero
 import PatientChecks from "@/components/pages/digital-reputation/PatientChecks";
 import TheWork from "@/components/pages/digital-reputation/TheWork";
 import EthicsCharter from "@/components/pages/digital-reputation/EthicsCharter";
-import ReputationFaq from "@/components/pages/digital-reputation/ReputationFaq";
+import ReputationFaq, { FAQS as REPUTATION_FAQS } from "@/components/pages/digital-reputation/ReputationFaq";
+import { faqPageSchema } from "@/lib/schema";
 
 export default function DigitalReputation() {
   return (
@@ -14,6 +15,7 @@ export default function DigitalReputation() {
         title="Digital Reputation for Doctors & Consultants | WardShift"
         description="Your reputation exists online before you enter the room. WardShift strengthens the search results and profiles patients see when researching a doctor."
         path="/digital-reputation/"
+        schema={faqPageSchema(REPUTATION_FAQS)}
       />
       <ReputationHero />
       <PatientChecks />

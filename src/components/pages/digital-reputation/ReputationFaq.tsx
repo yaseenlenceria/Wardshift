@@ -6,7 +6,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
-const FAQS = [
+export const FAQS = [
   {
     q: "Can you remove a negative review?",
     a: "Legitimate criticism stays. What we do is ensure the overall picture is accurate — that profiles are properly managed, information is correct, and genuine patient feedback can exist in context.",

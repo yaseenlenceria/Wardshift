@@ -34,7 +34,7 @@ const ISNT_ITEMS = [
   "Medical or business advice",
 ];
 
-const FAQS = [
+export const FAQS = [
   {
     q: "Is the Growth Review free?",
     a: "Details are confirmed when we respond to your request; the review is designed to be genuinely useful either way.",

@@ -8,7 +8,7 @@ export default function Contact() {
   return (
     <>
       <Seo
-        title="Contact WardShift | WardShift"
+        title="Contact the WardShift Team | WardShift"
         description="Talk to WardShift about growing your private practice — general enquiries, or book a Growth Review covering visibility, website, enquiries and measurement."
         path="/contact/"
       />

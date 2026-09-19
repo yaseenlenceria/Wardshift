@@ -41,7 +41,7 @@ const LOCAL_RESULTS = [
 
 function StarRating({ value, reviews }: { value: string; reviews: string }) {
   return (
-    <div className="flex items-center gap-1.5 text-[12px] text-grey-500">
+    <div className="flex flex-wrap items-center gap-x-1.5 gap-y-1 text-[12px] text-grey-500">
       <MapPin className="h-3.5 w-3.5 shrink-0 text-grey-400" aria-hidden="true" />
       <span className="font-semibold text-amber-500">{value}</span>
       <span className="flex text-amber-400" aria-hidden="true">
@@ -85,16 +85,16 @@ function SearchResultsVisual({ reduced }: { reduced: boolean }) {
       animate={reduced ? undefined : { opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: EASE_OUT, delay: 0.4 }}
     >
-      {/* Browser top chrome */}
+      {/* Browser top chrome — neutral window controls */}
       <div className="flex items-center border-b border-grey-200 bg-[#fbfcfd] px-4 py-3 sm:px-5">
-        <div className="flex items-center gap-1.5 shrink-0">
-          <span className="h-3 w-3 rounded-full bg-[#ef4444]" aria-hidden="true" />
-          <span className="h-3 w-3 rounded-full bg-[#f59e0b]" aria-hidden="true" />
-          <span className="h-3 w-3 rounded-full bg-[#22c55e]" aria-hidden="true" />
+        <div className="flex items-center gap-1.5 shrink-0" aria-hidden="true">
+          <span className="h-2.5 w-2.5 rounded-full bg-grey-300" />
+          <span className="h-2.5 w-2.5 rounded-full bg-grey-300" />
+          <span className="h-2.5 w-2.5 rounded-full bg-grey-300" />
         </div>
-        <div className="mx-auto flex max-w-[380px] flex-1 items-center justify-center">
+        <div className="mx-auto flex min-w-0 max-w-[380px] flex-1 items-center justify-center">
           <span className="truncate rounded-full bg-[#f1f5f9] px-4 py-1 font-mono text-[10.5px] text-grey-600 sm:text-[11px]">
-            google.com/search?q=knee+specialist+near+me
+            search.example.com/search?q=knee+specialist+near+me
           </span>
         </div>
       </div>
@@ -109,13 +109,13 @@ function SearchResultsVisual({ reduced }: { reduced: boolean }) {
           </span>
         </div>
 
-        {/* Local Results Panel (Full Width) — sample data, labelled illustrative */}
+        {/* Local results panel — sample data, labelled illustrative */}
         <div className="rounded-[12px] border border-grey-200 bg-white p-4 sm:p-5">
-          <div className="flex items-center justify-between border-b border-grey-100 pb-2.5">
+          <div className="flex items-center justify-between gap-2 border-b border-grey-100 pb-2.5">
             <p className="font-mono text-[10.5px] font-semibold uppercase tracking-[0.14em] text-grey-500">
               Local results
             </p>
-            <p className="font-mono text-[10.5px] uppercase tracking-[0.14em] text-grey-400">
+            <p className="truncate font-mono text-[10.5px] uppercase tracking-[0.14em] text-grey-400">
               Illustrative example
             </p>
           </div>
@@ -125,12 +125,19 @@ function SearchResultsVisual({ reduced }: { reduced: boolean }) {
               <motion.li
                 key={result.name}
                 layout="position"
-                transition={{ duration: 0.55, ease: EASE_OUT }}
+                animate={
+                  !reduced && result.active && improved
+                    ? { boxShadow: "0 0 26px rgba(20,184,166,0.20)" }
+                    : { boxShadow: "0 0 0px rgba(20,184,166,0)" }
+                }
+                transition={{ layout: { duration: 0.7, ease: EASE_OUT }, duration: 0.6, ease: EASE_OUT }}
                 className={cn(
-                  "rounded-[10px] border p-3.5 transition-all duration-300",
-                  result.active
-                    ? "border-teal-400/90 bg-[#f0fdfa] shadow-[0_0_18px_rgba(20,184,166,0.12)]"
-                    : "border-grey-200 bg-white hover:border-grey-300",
+                  "rounded-[10px] border p-3.5 transition-colors duration-300",
+                  result.active && improved
+                    ? "border-teal-400/90 bg-[#f0fdfa]"
+                    : result.active
+                    ? "border-teal-400/60 bg-white"
+                    : "border-grey-200 bg-white",
                 )}
               >
                 <div className="flex items-start justify-between gap-3">
@@ -143,14 +150,24 @@ function SearchResultsVisual({ reduced }: { reduced: boolean }) {
                     >
                       {result.name}
                     </p>
-                    <p className="mt-0.5 text-[12px] leading-snug text-grey-500">
-                      {result.meta}
+                    <p className="mt-0.5 flex flex-wrap items-center gap-x-2 text-[12px] leading-snug text-grey-500">
+                      <span>{result.meta}</span>
+                      {result.active && (
+                        <motion.span
+                          initial={false}
+                          animate={{ opacity: improved ? 1 : 0, y: improved ? 0 : 3 }}
+                          transition={{ duration: 0.4, ease: EASE_OUT }}
+                          className="font-mono text-[10px] font-semibold uppercase tracking-wider text-teal-600"
+                        >
+                          ↑ {result.beforePosition - result.afterPosition} positions
+                        </motion.span>
+                      )}
                     </p>
                   </div>
                   <span
                     className={cn(
                       "rounded-full px-2.5 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-wider",
-                      result.active
+                      result.active && improved
                         ? "border border-teal-200/80 bg-white text-teal-600 shadow-2xs"
                         : "bg-grey-100 text-grey-600",
                     )}
@@ -166,7 +183,7 @@ function SearchResultsVisual({ reduced }: { reduced: boolean }) {
           </ul>
         </div>
 
-        {/* Bottom organic Google result */}
+        {/* Bottom organic result — explanatory, sample domain */}
         <div className="rounded-[12px] border border-grey-200 bg-white p-4 sm:p-5">
           <p className="text-[13px] font-semibold text-[#1a0dab] sm:text-[14px]">
             Your Practice | Consultant Knee Specialist
@@ -175,7 +192,8 @@ function SearchResultsVisual({ reduced }: { reduced: boolean }) {
             www.example.com/knee-specialist
           </p>
           <p className="mt-1.5 text-[12px] leading-relaxed text-grey-600">
-            Shows the practice moving from position 3 to position 1 as visibility improves.
+            Illustrative: the practice moves from position 3 to position 1 as its visibility
+            improves.
           </p>
         </div>
       </div>
@@ -195,6 +213,11 @@ function HeroVisual({ reduced }: { reduced: boolean }) {
       style={reduced ? undefined : { y: parallaxY }}
       className="relative mx-auto w-full max-w-[560px] lg:max-w-none"
     >
+      {/* soft teal glow behind the card — adds depth without clutter */}
+      <div
+        className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[70%] w-[86%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-teal-400/[0.09] blur-[70px]"
+        aria-hidden="true"
+      />
       <SearchResultsVisual reduced={reduced} />
     </motion.div>
   );
@@ -233,7 +256,7 @@ export default function Hero() {
         <path d="M0 150 L800 20" stroke="#14B8A6" strokeOpacity="0.35" strokeWidth="1" />
       </svg>
 
-      <div className="relative mx-auto grid min-h-[calc(100dvh-72px)] max-w-site items-center gap-14 px-6 py-16 lg:min-h-[720px] lg:grid-cols-2 lg:py-24">
+      <div className="relative mx-auto grid min-h-[calc(100dvh-72px)] max-w-site grid-cols-1 items-center gap-14 px-6 py-16 lg:min-h-[720px] lg:grid-cols-2 lg:py-24">
         {/* copy */}
         <div className="max-w-[560px]">
           <motion.p

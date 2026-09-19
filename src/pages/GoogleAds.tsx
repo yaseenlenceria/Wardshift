@@ -5,7 +5,8 @@ import AdsHero from "@/components/pages/google-ads/AdsHero";
 import CampaignBuild from "@/components/pages/google-ads/CampaignBuild";
 import IntentSorter from "@/components/pages/google-ads/IntentSorter";
 import Measurement from "@/components/pages/google-ads/Measurement";
-import AdsFaq from "@/components/pages/google-ads/AdsFaq";
+import AdsFaq, { FAQS as ADS_FAQS } from "@/components/pages/google-ads/AdsFaq";
+import { faqPageSchema } from "@/lib/schema";
 
 export default function GoogleAds() {
   return (
@@ -14,6 +15,7 @@ export default function GoogleAds() {
         title="Google Ads for Private Doctors & Consultants | WardShift"
         description="Measurable Google Ads for private practices — high-intent search campaigns, specialist landing pages, call and form tracking, disciplined budget management."
         path="/google-ads/"
+        schema={faqPageSchema(ADS_FAQS)}
       />
       <AdsHero />
       <CampaignBuild />

@@ -6,7 +6,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
-const FAQS = [
+export const FAQS = [
   {
     q: "How much budget do we need?",
     a: "It depends on your specialty and market. Before anything is spent, we model scenarios — likely click costs, realistic enquiry ranges and the point at which a campaign becomes worthwhile — so the decision is made on numbers, not guesswork.",

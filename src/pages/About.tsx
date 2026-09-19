@@ -10,7 +10,7 @@ export default function About() {
   return (
     <>
       <Seo
-        title="About WardShift — The Growth Side of Private Practice | WardShift"
+        title="About WardShift | The Growth Side of Private Practice"
         description="WardShift exists because clinical excellence and patient discoverability are different disciplines. Learn what we believe and how we work with private doctors."
         path="/about/"
       />

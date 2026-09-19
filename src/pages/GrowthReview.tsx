@@ -1,7 +1,13 @@
 import Seo from "@/components/Seo";
 import RelatedLinks from "@/components/RelatedLinks";
 import HeroAndForm from "@/components/pages/growth-review/HeroAndForm";
-import { AfterSteps, FaqAndClosing, IsAndIsnt } from "@/components/pages/growth-review/Sections";
+import {
+  AfterSteps,
+  FaqAndClosing,
+  IsAndIsnt,
+  FAQS as REVIEW_FAQS,
+} from "@/components/pages/growth-review/Sections";
+import { faqPageSchema } from "@/lib/schema";
 
 export default function GrowthReview() {
   return (
@@ -10,6 +16,7 @@ export default function GrowthReview() {
         title="Book a Practice Growth Review | WardShift"
         description="A structured look at your practice's visibility, positioning, website, enquiry handling and measurement. Book a WardShift Practice Growth Review."
         path="/growth-review/"
+        schema={faqPageSchema(REVIEW_FAQS)}
       />
       <HeroAndForm />
       <AfterSteps />
