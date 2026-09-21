@@ -1,5 +1,6 @@
 import Seo from "@/components/Seo";
 import RelatedLinks from "@/components/RelatedLinks";
+import BookingCalendarSection from "@/components/BookingCalendar";
 import HeroAndForm from "@/components/pages/growth-review/HeroAndForm";
 import {
   AfterSteps,
@@ -19,6 +20,11 @@ export default function GrowthReview() {
         schema={faqPageSchema(REVIEW_FAQS)}
       />
       <HeroAndForm />
+      <BookingCalendarSection
+        eyebrow="Book directly"
+        title="Pick a Time. Skip the Form."
+        lede="Choose a slot on our calendar and the Growth Review conversation is booked — thirty minutes, no obligation. Prefer to write first? The request form above works too."
+      />
       <AfterSteps />
       <IsAndIsnt />
       <FaqAndClosing />

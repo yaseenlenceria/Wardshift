@@ -1,6 +1,7 @@
 import Seo from "@/components/Seo";
 import CtaBand from "@/components/CtaBand";
 import RelatedLinks from "@/components/RelatedLinks";
+import BookingCalendarSection from "@/components/BookingCalendar";
 import ContactHero from "@/components/pages/contact/ContactHero";
 import OtherRoutes from "@/components/pages/contact/OtherRoutes";
 
@@ -14,6 +15,11 @@ export default function Contact() {
       />
       <ContactHero />
       <OtherRoutes />
+      <BookingCalendarSection
+        eyebrow="Book a call"
+        title="Or Book Straight Into Our Calendar."
+        lede="A thirty-minute call to talk through your practice and what you'd like to improve. Pick whatever time suits you — no obligation."
+      />
       <RelatedLinks
         items={[
           { category: "Conversion", title: "Book a Practice Growth Review", href: "/growth-review/" },
